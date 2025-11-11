@@ -86,23 +86,29 @@ const SalesOrders = () => {
 
   return (
     <Box>
-      <Heading size="lg" mb={6} color="brand.primary">
+      <Heading size={{ base: 'md', md: 'lg' }} mb={{ base: 4, md: 6 }} color="brand.primary">
         Sales Orders
       </Heading>
 
-      <Card mb={6}>
+      <Card mb={{ base: 4, md: 6 }}>
         <CardBody>
-          <HStack spacing={4} mb={4}>
+          <HStack 
+            spacing={{ base: 2, md: 4 }} 
+            mb={4}
+            flexWrap={{ base: 'wrap', md: 'nowrap' }}
+          >
             <Input
               placeholder="Search by order no or customer..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              maxW="400px"
+              maxW={{ base: '100%', md: '400px' }}
+              flex={{ base: '1 1 100%', md: '0 1 auto' }}
             />
             <Select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              maxW="200px"
+              maxW={{ base: '100%', md: '200px' }}
+              flex={{ base: '1 1 100%', md: '0 1 auto' }}
             >
               <option value="All">All Status</option>
               <option value="Pending Approval">Pending Approval</option>
@@ -114,7 +120,9 @@ const SalesOrders = () => {
             <Button
               leftIcon={<FiPlus />}
               colorScheme="brand"
-              ml="auto"
+              ml={{ base: 0, md: 'auto' }}
+              width={{ base: '100%', md: 'auto' }}
+              size={{ base: 'md', md: 'md' }}
             >
               New Order
             </Button>

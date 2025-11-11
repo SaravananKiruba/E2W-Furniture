@@ -8,6 +8,11 @@ import {
   useDisclosure,
   Flex,
   Divider,
+  Drawer,
+  DrawerBody,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import {
@@ -28,11 +33,12 @@ import {
   FiChevronRight,
 } from 'react-icons/fi';
 
-const NavItem = ({ icon, children, to, isSubmenu = false }) => {
+const NavItem = ({ icon, children, to, isSubmenu = false, onClick }) => {
   return (
     <Box
       as={NavLink}
       to={to}
+      onClick={onClick}
       style={{ textDecoration: 'none' }}
       _activeLink={{
         bg: 'brand.primary',
@@ -98,18 +104,9 @@ const NavGroup = ({ icon, label, children }) => {
   );
 };
 
-const Sidebar = ({ isOpen }) => {
-  if (!isOpen) return null;
-
-  return (
-    <Box
-      w="280px"
-      bg="white"
-      borderRight="1px"
-      borderColor="gray.200"
-      overflowY="auto"
-      boxShadow="sm"
-    >
+const Sidebar = ({ isOpen, onClose, isMobile }) => {
+  const sidebarContent = (
+    <>
       {/* Logo */}
       <Flex
         h="16"
@@ -125,12 +122,12 @@ const Sidebar = ({ isOpen }) => {
 
       <VStack align="stretch" spacing={1} py={4}>
         {/* Dashboard */}
-        <NavItem icon={FiHome} to="/">
+        <NavItem icon={FiHome} to="/" onClick={isMobile ? onClose : undefined}>
           Dashboard
         </NavItem>
 
         {/* Customers */}
-        <NavItem icon={FiUsers} to="/customers">
+        <NavItem icon={FiUsers} to="/customers" onClick={isMobile ? onClose : undefined}>
           Customers
         </NavItem>
 
@@ -138,47 +135,78 @@ const Sidebar = ({ isOpen }) => {
 
         {/* Sales Module */}
         <NavGroup icon={FiShoppingCart} label="Sales">
-          <NavItem icon={FiClipboard} to="/sales/inquiries" isSubmenu>
+          <NavItem icon={FiClipboard} to="/sales/inquiries" isSubmenu onClick={isMobile ? onClose : undefined}>
             Inquiries
           </NavItem>
-          <NavItem icon={FiFileText} to="/sales/quotations" isSubmenu>
+          <NavItem icon={FiFileText} to="/sales/quotations" isSubmenu onClick={isMobile ? onClose : undefined}>
             Quotations
           </NavItem>
-          <NavItem icon={FiFile} to="/sales/orders" isSubmenu>
+          <NavItem icon={FiFile} to="/sales/orders" isSubmenu onClick={isMobile ? onClose : undefined}>
             Sales Orders
           </NavItem>
-          <NavItem icon={FiFile} to="/sales/invoices" isSubmenu>
+          <NavItem icon={FiFile} to="/sales/invoices" isSubmenu onClick={isMobile ? onClose : undefined}>
             Invoices
           </NavItem>
         </NavGroup>
 
         {/* Accounts Module */}
         <NavGroup icon={FiDollarSign} label="Accounts">
-          <NavItem icon={FiCreditCard} to="/accounts/payments" isSubmenu>
+          <NavItem icon={FiCreditCard} to="/accounts/payments" isSubmenu onClick={isMobile ? onClose : undefined}>
             Payments
           </NavItem>
-          <NavItem icon={FiBook} to="/accounts/ledger" isSubmenu>
+          <NavItem icon={FiBook} to="/accounts/ledger" isSubmenu onClick={isMobile ? onClose : undefined}>
             Customer Ledger
           </NavItem>
-          <NavItem icon={FiBarChart2} to="/accounts/reports" isSubmenu>
+          <NavItem icon={FiBarChart2} to="/accounts/reports" isSubmenu onClick={isMobile ? onClose : undefined}>
             Reports
           </NavItem>
         </NavGroup>
 
         {/* Stock Module */}
         <NavGroup icon={FiPackage} label="Stock">
-          <NavItem icon={FiBox} to="/stock/products" isSubmenu>
+          <NavItem icon={FiBox} to="/stock/products" isSubmenu onClick={isMobile ? onClose : undefined}>
             Products
           </NavItem>
         </NavGroup>
 
         {/* Delivery Module */}
         <NavGroup icon={FiTruck} label="Delivery">
-          <NavItem icon={FiFileText} to="/delivery/notes" isSubmenu>
+          <NavItem icon={FiFileText} to="/delivery/notes" isSubmenu onClick={isMobile ? onClose : undefined}>
             Delivery Notes
           </NavItem>
         </NavGroup>
       </VStack>
+    </>
+  );
+
+  // Mobile: Render as Drawer
+  if (isMobile) {
+    return (
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="xs">
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton color="white" />
+          <DrawerBody p={0} overflowY="auto">
+            {sidebarContent}
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+
+  // Desktop: Render as fixed sidebar
+  if (!isOpen) return null;
+
+  return (
+    <Box
+      w="280px"
+      bg="white"
+      borderRight="1px"
+      borderColor="gray.200"
+      overflowY="auto"
+      boxShadow="sm"
+    >
+      {sidebarContent}
     </Box>
   );
 };

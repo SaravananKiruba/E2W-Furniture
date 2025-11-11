@@ -99,23 +99,29 @@ const Customers = () => {
 
   return (
     <Box>
-      <Heading size="lg" mb={6} color="brand.primary">
+      <Heading size={{ base: 'md', md: 'lg' }} mb={{ base: 4, md: 6 }} color="brand.primary">
         Customer Management
       </Heading>
 
-      <Card mb={6}>
+      <Card mb={{ base: 4, md: 6 }}>
         <CardBody>
-          <HStack spacing={4} mb={4}>
+          <HStack 
+            spacing={{ base: 2, md: 4 }} 
+            mb={4}
+            flexWrap={{ base: 'wrap', md: 'nowrap' }}
+          >
             <Input
               placeholder="Search by name, phone or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              maxW="400px"
+              maxW={{ base: '100%', md: '400px' }}
+              flex={{ base: '1 1 100%', md: '0 1 auto' }}
             />
             <Select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              maxW="200px"
+              maxW={{ base: '100%', md: '200px' }}
+              flex={{ base: '1 1 100%', md: '0 1 auto' }}
             >
               <option value="All">All Types</option>
               <option value="Retail">Retail</option>
@@ -125,7 +131,9 @@ const Customers = () => {
               leftIcon={<FiPlus />}
               colorScheme="brand"
               onClick={onOpen}
-              ml="auto"
+              ml={{ base: 0, md: 'auto' }}
+              width={{ base: '100%', md: 'auto' }}
+              size={{ base: 'md', md: 'md' }}
             >
               Add Customer
             </Button>
@@ -194,13 +202,13 @@ const Customers = () => {
       </Card>
 
       {/* Add Customer Modal */}
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'full', md: 'xl' }}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent mx={{ base: 0, md: 4 }}>
           <ModalHeader>Add New Customer</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <SimpleGrid columns={2} spacing={4}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
               <FormControl isRequired>
                 <FormLabel>Full Name</FormLabel>
                 <Input
@@ -276,14 +284,14 @@ const Customers = () => {
       </Modal>
 
       {/* View Customer Modal */}
-      <Modal isOpen={isViewOpen} onClose={onViewClose}>
+      <Modal isOpen={isViewOpen} onClose={onViewClose} size={{ base: 'full', md: 'lg' }}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent mx={{ base: 0, md: 4 }}>
           <ModalHeader>Customer Details</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {selectedCustomer && (
-              <SimpleGrid columns={2} spacing={4}>
+              <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
                 <Box>
                   <Text fontSize="sm" color="gray.600">Customer ID</Text>
                   <Text fontWeight="600">#{selectedCustomer.id}</Text>

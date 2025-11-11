@@ -31,19 +31,19 @@ const StatCard = ({ title, value, icon, change, changeType = 'increase', color }
   return (
     <Card>
       <CardBody>
-        <Flex justify="space-between">
-          <Box>
-            <Text fontSize="sm" color="gray.600" mb={1}>
+        <Flex justify="space-between" direction={{ base: 'row', sm: 'row' }}>
+          <Box flex="1">
+            <Text fontSize={{ base: 'xs', md: 'sm' }} color="gray.600" mb={1}>
               {title}
             </Text>
-            <Text fontSize="2xl" fontWeight="bold" color={color}>
+            <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold" color={color}>
               {value}
             </Text>
             {change && (
               <Stat>
                 <Flex align="center" mt={2}>
                   <StatArrow type={changeType} />
-                  <Text fontSize="sm" color={changeType === 'increase' ? 'green.500' : 'red.500'}>
+                  <Text fontSize={{ base: 'xs', md: 'sm' }} color={changeType === 'increase' ? 'green.500' : 'red.500'}>
                     {change}
                   </Text>
                 </Flex>
@@ -53,12 +53,12 @@ const StatCard = ({ title, value, icon, change, changeType = 'increase', color }
           <Flex
             align="center"
             justify="center"
-            w="50px"
-            h="50px"
+            w={{ base: '40px', md: '50px' }}
+            h={{ base: '40px', md: '50px' }}
             borderRadius="lg"
             bg={`${color}.50`}
           >
-            <Icon as={icon} fontSize="24px" color={color} />
+            <Icon as={icon} fontSize={{ base: '20px', md: '24px' }} color={color} />
           </Flex>
         </Flex>
       </CardBody>
@@ -92,12 +92,12 @@ const Dashboard = () => {
 
   return (
     <Box>
-      <Heading size="lg" mb={6} color="brand.primary">
+      <Heading size={{ base: 'md', md: 'lg' }} mb={{ base: 4, md: 6 }} color="brand.primary">
         Dashboard
       </Heading>
 
       {/* Stats Grid */}
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6} mb={8}>
+      <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={{ base: 4, md: 6 }} mb={{ base: 6, md: 8 }}>
         <StatCard
           title="Total Sales (This Month)"
           value={formatCurrency(dashboardStats.totalSales)}
@@ -130,17 +130,17 @@ const Dashboard = () => {
         />
       </SimpleGrid>
 
-      <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={6}>
+      <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 4, md: 6 }}>
         {/* Recent Orders */}
         <Card>
           <CardHeader>
-            <Heading size="md" color="brand.primary">
+            <Heading size={{ base: 'sm', md: 'md' }} color="brand.primary">
               Recent Sales Orders
             </Heading>
           </CardHeader>
           <CardBody>
             <Box overflowX="auto">
-              <Table variant="simple" size="sm">
+              <Table variant="simple" size={{ base: 'sm', md: 'sm' }}>
                 <Thead>
                   <Tr>
                     <Th>Order No</Th>
@@ -171,13 +171,13 @@ const Dashboard = () => {
         {/* Recent Deliveries */}
         <Card>
           <CardHeader>
-            <Heading size="md" color="brand.primary">
+            <Heading size={{ base: 'sm', md: 'md' }} color="brand.primary">
               Delivery Status
             </Heading>
           </CardHeader>
           <CardBody>
             <Box overflowX="auto">
-              <Table variant="simple" size="sm">
+              <Table variant="simple" size={{ base: 'sm', md: 'sm' }}>
                 <Thead>
                   <Tr>
                     <Th>Delivery No</Th>

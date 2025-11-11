@@ -35,11 +35,22 @@ const theme = extendTheme({
     heading: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
     body: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
   },
+  breakpoints: {
+    base: '0px',
+    sm: '480px',
+    md: '768px',
+    lg: '992px',
+    xl: '1280px',
+    '2xl': '1536px',
+  },
   styles: {
     global: {
       body: {
         bg: 'gray.50',
         color: 'gray.800',
+      },
+      '*': {
+        boxSizing: 'border-box',
       },
     },
   },

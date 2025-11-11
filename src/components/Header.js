@@ -20,7 +20,7 @@ const Header = ({ onToggle }) => {
       as="header"
       align="center"
       justify="space-between"
-      px={6}
+      px={{ base: 3, md: 6 }}
       py={3}
       bg="white"
       borderBottom="1px"
@@ -28,19 +28,32 @@ const Header = ({ onToggle }) => {
       boxShadow="sm"
       h="16"
     >
-      <HStack spacing={4}>
+      <HStack spacing={{ base: 2, md: 4 }}>
         <IconButton
           icon={<FiMenu />}
           variant="ghost"
           onClick={onToggle}
           aria-label="Toggle Navigation"
         />
-        <Text fontSize="lg" fontWeight="600" color="brand.primary">
+        <Text 
+          fontSize={{ base: 'sm', md: 'lg' }} 
+          fontWeight="600" 
+          color="brand.primary"
+          display={{ base: 'none', sm: 'block' }}
+        >
           Showroom Management System
+        </Text>
+        <Text 
+          fontSize="sm" 
+          fontWeight="600" 
+          color="brand.primary"
+          display={{ base: 'block', sm: 'none' }}
+        >
+          Saakar
         </Text>
       </HStack>
 
-      <HStack spacing={4}>
+      <HStack spacing={{ base: 2, md: 4 }}>
         {/* Notifications */}
         <Menu>
           <MenuButton
@@ -98,7 +111,7 @@ const Header = ({ onToggle }) => {
         <Menu>
           <MenuButton>
             <HStack spacing={2}>
-              <Avatar size="sm" name="Admin User" bg="brand.primary" />
+              <Avatar size={{ base: 'sm', md: 'sm' }} name="Admin User" bg="brand.primary" />
               <Box textAlign="left" display={{ base: 'none', md: 'block' }}>
                 <Text fontSize="sm" fontWeight="600">
                   Admin User

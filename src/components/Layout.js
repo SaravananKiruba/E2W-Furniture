@@ -1,17 +1,26 @@
 import React from 'react';
-import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, useDisclosure, useBreakpointValue } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
 const Layout = ({ children }) => {
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
+  // On desktop, sidebar is open by default. On mobile, it's closed by default.
+  const isMobile = useBreakpointValue({ base: true, lg: false });
+  const { isOpen, onToggle, onClose } = useDisclosure({ 
+    defaultIsOpen: !isMobile 
+  });
 
   return (
     <Flex h="100vh" overflow="hidden">
-      <Sidebar isOpen={isOpen} onToggle={onToggle} />
+      <Sidebar isOpen={isOpen} onToggle={onToggle} onClose={onClose} isMobile={isMobile} />
       <Flex direction="column" flex="1" overflow="hidden">
         <Header onToggle={onToggle} />
-        <Box flex="1" overflow="auto" bg="gray.50" p={6}>
+        <Box 
+          flex="1" 
+          overflow="auto" 
+          bg="gray.50" 
+          p={{ base: 3, md: 6 }}
+        >
           {children}
         </Box>
       </Flex>
