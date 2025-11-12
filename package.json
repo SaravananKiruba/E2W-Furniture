@@ -1,8 +1,8 @@
 {
-  "name": "saakar-furniture-app",
+  "name": "e2w-furniture",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://saravanankiruba.github.io/saakar-furniture-app",
+  "homepage": "https://saravanankiruba.github.io/E2W-Furniture",
   "dependencies": {
     "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/react": "^2.10.9",
