@@ -165,7 +165,23 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
         {/* Stock Module */}
         <NavGroup icon={FiPackage} label="Stock">
           <NavItem icon={FiBox} to="/stock/products" isSubmenu onClick={isMobile ? onClose : undefined}>
-            Products
+            Products (Goods)
+          </NavItem>
+          <NavItem icon={FiPackage} to="/stock/raw-materials" isSubmenu onClick={isMobile ? onClose : undefined}>
+            Raw Materials
+          </NavItem>
+        </NavGroup>
+
+        {/* Purchases & Expenses Module */}
+        <NavGroup icon={FiDollarSign} label="Purchases & Expenses">
+          <NavItem icon={FiUsers} to="/vendors" isSubmenu onClick={isMobile ? onClose : undefined}>
+            Vendors
+          </NavItem>
+          <NavItem icon={FiFileText} to="/purchases/orders" isSubmenu onClick={isMobile ? onClose : undefined}>
+            Purchase Orders
+          </NavItem>
+          <NavItem icon={FiCreditCard} to="/purchases/expenses" isSubmenu onClick={isMobile ? onClose : undefined}>
+            Expenses
           </NavItem>
         </NavGroup>
 

@@ -205,51 +205,104 @@ const Products = () => {
       </Card>
 
       {/* View Product Modal */}
-      <Modal isOpen={isViewOpen} onClose={onViewClose} size="lg">
+      <Modal isOpen={isViewOpen} onClose={onViewClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Product Details</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {selectedProduct && (
-              <SimpleGrid columns={2} spacing={4}>
-                <Box>
-                  <Text fontSize="sm" color="gray.600">SKU</Text>
-                  <Text fontWeight="600">{selectedProduct.sku}</Text>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" color="gray.600">Category</Text>
-                  <Badge colorScheme="purple">{selectedProduct.category}</Badge>
-                </Box>
-                <Box gridColumn="span 2">
-                  <Text fontSize="sm" color="gray.600">Product Name</Text>
-                  <Text fontWeight="600" fontSize="lg">{selectedProduct.name}</Text>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" color="gray.600">Price</Text>
-                  <Text fontWeight="600" fontSize="xl" color="brand.primary">
-                    {formatCurrency(selectedProduct.price)}
-                  </Text>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" color="gray.600">Stock Quantity</Text>
-                  <Text fontWeight="600" fontSize="xl" 
-                    color={selectedProduct.stock > 5 ? 'green.600' : selectedProduct.stock > 2 ? 'orange.600' : 'red.600'}
-                  >
-                    {selectedProduct.stock} units
-                  </Text>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" color="gray.600">Location</Text>
-                  <Text fontWeight="600">{selectedProduct.location}</Text>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" color="gray.600">Status</Text>
-                  <Badge colorScheme={getStatusColor(selectedProduct.status)} fontSize="md">
-                    {selectedProduct.status}
-                  </Badge>
-                </Box>
-              </SimpleGrid>
+              <Box>
+                <SimpleGrid columns={2} spacing={4} mb={6}>
+                  <Box>
+                    <Text fontSize="sm" color="gray.600">SKU</Text>
+                    <Text fontWeight="600">{selectedProduct.sku}</Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" color="gray.600">Category</Text>
+                    <Badge colorScheme="purple">{selectedProduct.category}</Badge>
+                  </Box>
+                  <Box gridColumn="span 2">
+                    <Text fontSize="sm" color="gray.600">Product Name</Text>
+                    <Text fontWeight="600" fontSize="lg">{selectedProduct.name}</Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" color="gray.600">Price</Text>
+                    <Text fontWeight="600" fontSize="xl" color="brand.primary">
+                      {formatCurrency(selectedProduct.price)}
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" color="gray.600">Stock Quantity</Text>
+                    <Text fontWeight="600" fontSize="xl" 
+                      color={selectedProduct.stock > 5 ? 'green.600' : selectedProduct.stock > 2 ? 'orange.600' : 'red.600'}
+                    >
+                      {selectedProduct.stock} units
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" color="gray.600">Location</Text>
+                    <Text fontWeight="600">{selectedProduct.location}</Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" color="gray.600">Status</Text>
+                    <Badge colorScheme={getStatusColor(selectedProduct.status)} fontSize="md">
+                      {selectedProduct.status}
+                    </Badge>
+                  </Box>
+                </SimpleGrid>
+
+                {/* Bill of Materials Section */}
+                {selectedProduct.bom && selectedProduct.bom.length > 0 && (
+                  <Box mt={6} pt={6} borderTop="1px" borderColor="gray.200">
+                    <Heading size="sm" mb={4} color="brand.primary">
+                      Bill of Materials (BOM)
+                    </Heading>
+                    <Text fontSize="sm" color="gray.600" mb={3}>
+                      Raw materials required to manufacture 1 unit
+                    </Text>
+                    <Box overflowX="auto">
+                      <Table size="sm" variant="simple">
+                        <Thead bg="gray.50">
+                          <Tr>
+                            <Th>Material Code</Th>
+                            <Th>Material Name</Th>
+                            <Th>Quantity Required</Th>
+                            <Th>Unit</Th>
+                            <Th isNumeric>Cost per Unit</Th>
+                            <Th isNumeric>Total Cost</Th>
+                          </Tr>
+                        </Thead>
+                        <Tbody>
+                          {selectedProduct.bom.map((item, index) => (
+                            <Tr key={index}>
+                              <Td fontWeight="500">{item.materialCode}</Td>
+                              <Td>{item.materialName}</Td>
+                              <Td fontWeight="600">{item.quantity}</Td>
+                              <Td>{item.unit}</Td>
+                              <Td isNumeric>{formatCurrency(item.unitCost)}</Td>
+                              <Td isNumeric fontWeight="600" color="green.600">
+                                {formatCurrency(item.quantity * item.unitCost)}
+                              </Td>
+                            </Tr>
+                          ))}
+                          <Tr bg="gray.50" fontWeight="bold">
+                            <Td colSpan={5} textAlign="right">Total Material Cost per Unit:</Td>
+                            <Td isNumeric color="brand.primary" fontSize="lg">
+                              {formatCurrency(
+                                selectedProduct.bom.reduce(
+                                  (sum, item) => sum + item.quantity * item.unitCost,
+                                  0
+                                )
+                              )}
+                            </Td>
+                          </Tr>
+                        </Tbody>
+                      </Table>
+                    </Box>
+                  </Box>
+                )}
+              </Box>
             )}
           </ModalBody>
           <ModalFooter>

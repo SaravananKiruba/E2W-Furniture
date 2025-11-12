@@ -14,11 +14,53 @@ export const customers = [
 
 // Products
 export const products = [
-  { id: 1, sku: 'SF-SOF-001', name: 'Premium Leather Sofa 3-Seater', category: 'Sofa', price: 85000, stock: 5, status: 'Ready', location: 'Showroom A' },
-  { id: 2, sku: 'SF-BED-001', name: 'King Size Teak Wood Bed', category: 'Bed', price: 65000, stock: 3, status: 'Ready', location: 'Showroom B' },
-  { id: 3, sku: 'SF-DIN-001', name: '6-Seater Dining Table Set', category: 'Dining', price: 95000, stock: 2, status: 'On Display', location: 'Showroom A' },
-  { id: 4, sku: 'SF-WAR-001', name: '4-Door Sliding Wardrobe', category: 'Wardrobe', price: 75000, stock: 4, status: 'Ready', location: 'Warehouse' },
-  { id: 5, sku: 'SF-CHR-001', name: 'Executive Office Chair', category: 'Chair', price: 25000, stock: 8, status: 'Ready', location: 'Showroom B' },
+  { 
+    id: 1, sku: 'SF-SOF-001', name: 'Premium Leather Sofa 3-Seater', category: 'Sofa', price: 85000, stock: 5, status: 'Ready', location: 'Showroom A',
+    bom: [
+      { materialCode: 'RM-WOOD-001', materialName: 'Teak Wood Plank', quantity: 35, unit: 'Sq Ft', unitCost: 350 },
+      { materialCode: 'RM-FAB-001', materialName: 'Premium Leather (Brown)', quantity: 45, unit: 'Sq Ft', unitCost: 450 },
+      { materialCode: 'RM-FOAM-001', materialName: 'High Density Foam 4 inch', quantity: 3, unit: 'Piece', unitCost: 850 },
+      { materialCode: 'RM-HW-003', materialName: 'Screws - Assorted Pack', quantity: 1, unit: 'Box', unitCost: 120 },
+      { materialCode: 'RM-PNT-001', materialName: 'Wood Varnish - Teak', quantity: 2, unit: 'Liter', unitCost: 650 },
+    ]
+  },
+  { 
+    id: 2, sku: 'SF-BED-001', name: 'King Size Teak Wood Bed', category: 'Bed', price: 65000, stock: 3, status: 'Ready', location: 'Showroom B',
+    bom: [
+      { materialCode: 'RM-WOOD-001', materialName: 'Teak Wood Plank', quantity: 65, unit: 'Sq Ft', unitCost: 350 },
+      { materialCode: 'RM-HW-001', materialName: 'Hinges - Heavy Duty', quantity: 4, unit: 'Piece', unitCost: 45 },
+      { materialCode: 'RM-HW-003', materialName: 'Screws - Assorted Pack', quantity: 2, unit: 'Box', unitCost: 120 },
+      { materialCode: 'RM-PNT-002', materialName: 'Wood Stain - Walnut', quantity: 3, unit: 'Liter', unitCost: 550 },
+    ]
+  },
+  { 
+    id: 3, sku: 'SF-DIN-001', name: '6-Seater Dining Table Set', category: 'Dining', price: 95000, stock: 2, status: 'On Display', location: 'Showroom A',
+    bom: [
+      { materialCode: 'RM-WOOD-002', materialName: 'Sheesham Wood Plank', quantity: 85, unit: 'Sq Ft', unitCost: 280 },
+      { materialCode: 'RM-HW-003', materialName: 'Screws - Assorted Pack', quantity: 3, unit: 'Box', unitCost: 120 },
+      { materialCode: 'RM-PNT-001', materialName: 'Wood Varnish - Teak', quantity: 4, unit: 'Liter', unitCost: 650 },
+      { materialCode: 'RM-ACC-002', materialName: 'Furniture Legs - Metal', quantity: 24, unit: 'Piece', unitCost: 220 },
+    ]
+  },
+  { 
+    id: 4, sku: 'SF-WAR-001', name: '4-Door Sliding Wardrobe', category: 'Wardrobe', price: 75000, stock: 4, status: 'Ready', location: 'Warehouse',
+    bom: [
+      { materialCode: 'RM-WOOD-001', materialName: 'Teak Wood Plank', quantity: 120, unit: 'Sq Ft', unitCost: 350 },
+      { materialCode: 'RM-HW-002', materialName: 'Sliding Rails 6ft', quantity: 2, unit: 'Piece', unitCost: 850 },
+      { materialCode: 'RM-HW-003', materialName: 'Screws - Assorted Pack', quantity: 3, unit: 'Box', unitCost: 120 },
+      { materialCode: 'RM-ACC-001', materialName: 'Decorative Handles - Gold', quantity: 8, unit: 'Piece', unitCost: 85 },
+      { materialCode: 'RM-PNT-002', materialName: 'Wood Stain - Walnut', quantity: 5, unit: 'Liter', unitCost: 550 },
+    ]
+  },
+  { 
+    id: 5, sku: 'SF-CHR-001', name: 'Executive Office Chair', category: 'Chair', price: 25000, stock: 8, status: 'Ready', location: 'Showroom B',
+    bom: [
+      { materialCode: 'RM-WOOD-002', materialName: 'Sheesham Wood Plank', quantity: 12, unit: 'Sq Ft', unitCost: 280 },
+      { materialCode: 'RM-FAB-001', materialName: 'Premium Leather (Brown)', quantity: 8, unit: 'Sq Ft', unitCost: 450 },
+      { materialCode: 'RM-FOAM-001', materialName: 'High Density Foam 4 inch', quantity: 1, unit: 'Piece', unitCost: 850 },
+      { materialCode: 'RM-HW-003', materialName: 'Screws - Assorted Pack', quantity: 1, unit: 'Box', unitCost: 120 },
+    ]
+  },
   { id: 6, sku: 'SF-TAB-001', name: 'Coffee Table - Marble Top', category: 'Table', price: 18000, stock: 6, status: 'Ready', location: 'Showroom A' },
   { id: 7, sku: 'SF-SOF-002', name: 'L-Shape Sectional Sofa', category: 'Sofa', price: 120000, stock: 2, status: 'Reserved', location: 'Showroom A' },
   { id: 8, sku: 'SF-BED-002', name: 'Queen Size Storage Bed', category: 'Bed', price: 55000, stock: 5, status: 'Ready', location: 'Warehouse' },
@@ -94,3 +136,56 @@ export const dashboardStats = {
   topSellingCategory: 'Sofa',
   averageOrderValue: 125375,
 };
+
+// Raw Materials
+export const rawMaterials = [
+  { id: 1, code: 'RM-WOOD-001', name: 'Teak Wood Plank', category: 'Wood', currentStock: 450, minStock: 200, unit: 'Sq Ft', unitPrice: 350, supplier: 'Karnataka Wood Suppliers', location: 'Warehouse A - Rack 1', lastPurchaseDate: '2025-11-05' },
+  { id: 2, code: 'RM-WOOD-002', name: 'Sheesham Wood Plank', category: 'Wood', currentStock: 320, minStock: 150, unit: 'Sq Ft', unitPrice: 280, supplier: 'Karnataka Wood Suppliers', location: 'Warehouse A - Rack 2', lastPurchaseDate: '2025-11-01' },
+  { id: 3, code: 'RM-FAB-001', name: 'Premium Leather (Brown)', category: 'Leather', currentStock: 85, minStock: 100, unit: 'Sq Ft', unitPrice: 450, supplier: 'Leather House Bangalore', location: 'Warehouse B - Section 1', lastPurchaseDate: '2025-10-28' },
+  { id: 4, code: 'RM-FAB-002', name: 'Velvet Fabric (Blue)', category: 'Fabric', currentStock: 180, minStock: 80, unit: 'Meter', unitPrice: 180, supplier: 'Fabric World', location: 'Warehouse B - Section 2', lastPurchaseDate: '2025-11-08' },
+  { id: 5, code: 'RM-FOAM-001', name: 'High Density Foam 4 inch', category: 'Foam', currentStock: 45, minStock: 50, unit: 'Piece', unitPrice: 850, supplier: 'Comfort Foam Industries', location: 'Warehouse B - Section 3', lastPurchaseDate: '2025-10-25' },
+  { id: 6, code: 'RM-HW-001', name: 'Hinges - Heavy Duty', category: 'Hardware', currentStock: 320, minStock: 200, unit: 'Piece', unitPrice: 45, supplier: 'Modern Hardware Store', location: 'Warehouse C - Bin 12', lastPurchaseDate: '2025-11-02' },
+  { id: 7, code: 'RM-HW-002', name: 'Sliding Rails 6ft', category: 'Hardware', currentStock: 65, minStock: 50, unit: 'Piece', unitPrice: 850, supplier: 'Modern Hardware Store', location: 'Warehouse C - Bin 15', lastPurchaseDate: '2025-11-07' },
+  { id: 8, code: 'RM-HW-003', name: 'Screws - Assorted Pack', category: 'Hardware', currentStock: 150, minStock: 100, unit: 'Box', unitPrice: 120, supplier: 'Modern Hardware Store', location: 'Warehouse C - Bin 8', lastPurchaseDate: '2025-11-10' },
+  { id: 9, code: 'RM-PNT-001', name: 'Wood Varnish - Teak', category: 'Paint & Finish', currentStock: 28, minStock: 30, unit: 'Liter', unitPrice: 650, supplier: 'Asian Paints', location: 'Warehouse C - Shelf 5', lastPurchaseDate: '2025-10-30' },
+  { id: 10, code: 'RM-PNT-002', name: 'Wood Stain - Walnut', category: 'Paint & Finish', currentStock: 42, minStock: 25, unit: 'Liter', unitPrice: 550, supplier: 'Asian Paints', location: 'Warehouse C - Shelf 5', lastPurchaseDate: '2025-11-06' },
+  { id: 11, code: 'RM-ACC-001', name: 'Decorative Handles - Gold', category: 'Accessories', currentStock: 180, minStock: 100, unit: 'Piece', unitPrice: 85, supplier: 'Designer Hardware', location: 'Warehouse C - Bin 20', lastPurchaseDate: '2025-11-03' },
+  { id: 12, code: 'RM-ACC-002', name: 'Furniture Legs - Metal', category: 'Accessories', currentStock: 95, minStock: 80, unit: 'Piece', unitPrice: 220, supplier: 'Modern Hardware Store', location: 'Warehouse C - Bin 18', lastPurchaseDate: '2025-11-09' },
+];
+
+// Vendors
+export const vendors = [
+  { id: 1, name: 'Karnataka Wood Suppliers', category: 'Wood Supplier', phone: '+91 98765 55001', email: 'info@karnatakawood.com', address: '45, Industrial Area, Peenya, Bangalore', gstin: '29AABCK5678M1Z2', paymentTerms: 'Net 30', totalPurchases: 1850000, outstandingAmount: 125000, status: 'Active', lastPurchaseDate: '2025-11-05' },
+  { id: 2, name: 'Leather House Bangalore', category: 'Leather Supplier', phone: '+91 98765 55002', email: 'sales@leatherhouse.in', address: '78, KR Market, Bangalore', gstin: '29BBCDE1234F2Z3', paymentTerms: 'Net 15', totalPurchases: 980000, outstandingAmount: 45000, status: 'Active', lastPurchaseDate: '2025-10-28' },
+  { id: 3, name: 'Fabric World', category: 'Fabric Supplier', phone: '+91 98765 55003', email: 'orders@fabricworld.com', address: '123, Commercial Street, Bangalore', gstin: '29CCDDE5678G3Z4', paymentTerms: 'Net 30', totalPurchases: 650000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-08' },
+  { id: 4, name: 'Comfort Foam Industries', category: 'Foam Supplier', phone: '+91 98765 55004', email: 'contact@comfortfoam.in', address: '56, Bommasandra Industrial Area, Bangalore', gstin: '29DDEEF9012H4Z5', paymentTerms: 'Net 7', totalPurchases: 420000, outstandingAmount: 38000, status: 'Active', lastPurchaseDate: '2025-10-25' },
+  { id: 5, name: 'Modern Hardware Store', category: 'Hardware Supplier', phone: '+91 98765 55005', email: 'sales@modernhardware.com', address: '234, KR Puram, Bangalore', gstin: '29EEFFG3456I5Z6', paymentTerms: 'Cash', totalPurchases: 850000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-10' },
+  { id: 6, name: 'Asian Paints', category: 'Paint & Finish', phone: '+91 98765 55006', email: 'bangalore@asianpaints.com', address: '89, Whitefield Road, Bangalore', gstin: '29FFGGH7890J6Z7', paymentTerms: 'Net 15', totalPurchases: 280000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-06' },
+  { id: 7, name: 'Designer Hardware', category: 'Accessories', phone: '+91 98765 55007', email: 'info@designerhardware.in', address: '67, Indiranagar, Bangalore', gstin: '29GGHHI1234K7Z8', paymentTerms: 'Net 30', totalPurchases: 320000, outstandingAmount: 28000, status: 'Active', lastPurchaseDate: '2025-11-03' },
+  { id: 8, name: 'Quick Transport Services', category: 'Logistics', phone: '+91 98765 55008', email: 'bookings@quicktransport.com', address: '12, Transport Nagar, Bangalore', gstin: '29HHIII5678L8Z9', paymentTerms: 'Net 7', totalPurchases: 180000, outstandingAmount: 12000, status: 'Active', lastPurchaseDate: '2025-11-09' },
+];
+
+// Purchase Orders
+export const purchaseOrders = [
+  { id: 1, poNo: 'PO-2025-001', vendorId: 1, vendorName: 'Karnataka Wood Suppliers', date: '2025-11-01', expectedDelivery: '2025-11-15', items: [{ materialCode: 'RM-WOOD-001', materialName: 'Teak Wood Plank', quantity: 200, unit: 'Sq Ft', rate: 350 }, { materialCode: 'RM-WOOD-002', materialName: 'Sheesham Wood Plank', quantity: 150, unit: 'Sq Ft', rate: 280 }], subtotal: 112000, gstPercent: 18, gst: 20160, total: 132160, status: 'Received', remarks: 'Monthly wood stock replenishment' },
+  { id: 2, poNo: 'PO-2025-002', vendorId: 2, vendorName: 'Leather House Bangalore', date: '2025-10-28', expectedDelivery: '2025-11-10', items: [{ materialCode: 'RM-FAB-001', materialName: 'Premium Leather (Brown)', quantity: 100, unit: 'Sq Ft', rate: 450 }], subtotal: 45000, gstPercent: 18, gst: 8100, total: 53100, status: 'Partially Received', remarks: 'For premium sofa collection' },
+  { id: 3, poNo: 'PO-2025-003', vendorId: 4, vendorName: 'Comfort Foam Industries', date: '2025-11-05', expectedDelivery: '2025-11-18', items: [{ materialCode: 'RM-FOAM-001', materialName: 'High Density Foam 4 inch', quantity: 50, unit: 'Piece', rate: 850 }], subtotal: 42500, gstPercent: 18, gst: 7650, total: 50150, status: 'Confirmed', remarks: 'Urgent requirement for sofa orders' },
+  { id: 4, poNo: 'PO-2025-004', vendorId: 5, vendorName: 'Modern Hardware Store', date: '2025-11-10', expectedDelivery: '2025-11-12', items: [{ materialCode: 'RM-HW-001', materialName: 'Hinges - Heavy Duty', quantity: 200, unit: 'Piece', rate: 45 }, { materialCode: 'RM-HW-003', materialName: 'Screws - Assorted Pack', quantity: 50, unit: 'Box', rate: 120 }], subtotal: 15000, gstPercent: 18, gst: 2700, total: 17700, status: 'Sent', remarks: 'Regular hardware replenishment' },
+  { id: 5, poNo: 'PO-2025-005', vendorId: 3, vendorName: 'Fabric World', date: '2025-11-08', expectedDelivery: '2025-11-20', items: [{ materialCode: 'RM-FAB-002', materialName: 'Velvet Fabric (Blue)', quantity: 100, unit: 'Meter', rate: 180 }], subtotal: 18000, gstPercent: 18, gst: 3240, total: 21240, status: 'Draft', remarks: 'For upcoming custom orders' },
+];
+
+// Expenses
+export const expenses = [
+  { id: 1, expenseNo: 'EXP-2025-001', date: '2025-11-01', category: 'Utilities', description: 'Electricity Bill - October', amount: 28500, paymentMode: 'Bank Transfer', status: 'Paid', transactionRef: 'NEFT2025110101', remarks: 'Paid on time' },
+  { id: 2, expenseNo: 'EXP-2025-002', date: '2025-11-02', category: 'Labor', description: 'Carpenter wages for October', amount: 45000, paymentMode: 'Cash', status: 'Paid', transactionRef: '', remarks: '3 carpenters - monthly wages' },
+  { id: 3, expenseNo: 'EXP-2025-003', date: '2025-11-03', category: 'Rent', description: 'Showroom Rent - November', amount: 85000, paymentMode: 'Cheque', status: 'Paid', transactionRef: 'CHQ789012', remarks: 'MG Road showroom' },
+  { id: 4, expenseNo: 'EXP-2025-004', date: '2025-11-04', category: 'Transportation', description: 'Delivery vehicle fuel and maintenance', amount: 12500, paymentMode: 'UPI', status: 'Paid', transactionRef: 'UPI2025110401', remarks: 'Weekly expense' },
+  { id: 5, expenseNo: 'EXP-2025-005', date: '2025-11-05', category: 'Raw Materials', description: 'Teak Wood Purchase - PO-2025-001', amount: 132160, paymentMode: 'Bank Transfer', vendorName: 'Karnataka Wood Suppliers', status: 'Paid', transactionRef: 'NEFT2025110502', remarks: 'Linked to PO-2025-001' },
+  { id: 6, expenseNo: 'EXP-2025-006', date: '2025-11-06', category: 'Maintenance', description: 'Factory machinery servicing', amount: 18000, paymentMode: 'Cash', status: 'Paid', transactionRef: '', remarks: 'Quarterly maintenance' },
+  { id: 7, expenseNo: 'EXP-2025-007', date: '2025-11-07', category: 'Office Supplies', description: 'Stationery and printing materials', amount: 3500, paymentMode: 'Card', status: 'Paid', transactionRef: 'CARD2025110701', remarks: '' },
+  { id: 8, expenseNo: 'EXP-2025-008', date: '2025-11-08', category: 'Marketing', description: 'Facebook and Google Ads - October', amount: 25000, paymentMode: 'Card', status: 'Paid', transactionRef: 'CARD2025110801', remarks: 'Digital marketing campaign' },
+  { id: 9, expenseNo: 'EXP-2025-009', date: '2025-11-09', category: 'Salaries', description: 'Staff salaries - October', amount: 185000, paymentMode: 'Bank Transfer', status: 'Approved', transactionRef: '', remarks: 'Pending disbursement on 15th' },
+  { id: 10, expenseNo: 'EXP-2025-010', date: '2025-11-10', category: 'Raw Materials', description: 'Hardware items - PO-2025-004', amount: 17700, paymentMode: 'Cash', vendorName: 'Modern Hardware Store', status: 'Paid', transactionRef: '', remarks: 'Cash payment on delivery' },
+  { id: 11, expenseNo: 'EXP-2025-011', date: '2025-11-11', category: 'Transportation', description: 'Goods carrier charges for delivery', amount: 8500, paymentMode: 'UPI', vendorName: 'Quick Transport Services', status: 'Pending', transactionRef: '', remarks: 'Awaiting delivery confirmation' },
+  { id: 12, expenseNo: 'EXP-2025-012', date: '2025-11-11', category: 'Other', description: 'Miscellaneous factory expenses', amount: 5200, paymentMode: 'Cash', status: 'Pending', transactionRef: '', remarks: 'Small purchases and repairs' },
+];

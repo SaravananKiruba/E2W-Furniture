@@ -12,8 +12,12 @@ import Payments from './pages/Accounts/Payments';
 import CustomerLedger from './pages/Accounts/CustomerLedger';
 import Reports from './pages/Accounts/Reports';
 import Products from './pages/Stock/Products';
+import RawMaterials from './pages/Stock/RawMaterials';
 import DeliveryNotes from './pages/Delivery/DeliveryNotes';
 import Customers from './pages/Customers';
+import Vendors from './pages/Vendors';
+import PurchaseOrders from './pages/Purchases/PurchaseOrders';
+import Expenses from './pages/Purchases/Expenses';
 
 function App() {
   return (
@@ -37,6 +41,12 @@ function App() {
             
             {/* Stock Module */}
             <Route path="/stock/products" element={<Products />} />
+            <Route path="/stock/raw-materials" element={<RawMaterials />} />
+            
+            {/* Purchases & Expenses Module */}
+            <Route path="/vendors" element={<Vendors />} />
+            <Route path="/purchases/orders" element={<PurchaseOrders />} />
+            <Route path="/purchases/expenses" element={<Expenses />} />
             
             {/* Delivery Module */}
             <Route path="/delivery/notes" element={<DeliveryNotes />} />

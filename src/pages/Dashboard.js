@@ -24,8 +24,10 @@ import {
   FiDollarSign,
   FiTruck,
   FiAlertCircle,
+  FiTrendingUp,
+  FiTrendingDown,
 } from 'react-icons/fi';
-import { dashboardStats, salesOrders, deliveryNotes } from '../data/mockData';
+import { dashboardStats, salesOrders, deliveryNotes, expenses, rawMaterials } from '../data/mockData';
 
 const StatCard = ({ title, value, icon, change, changeType = 'increase', color }) => {
   return (
@@ -70,6 +72,22 @@ const Dashboard = () => {
   const recentOrders = salesOrders.slice(0, 5);
   const recentDeliveries = deliveryNotes.slice(0, 5);
 
+  // Calculate expenses
+  const totalExpenses = expenses
+    .filter(exp => exp.status === 'Paid' || exp.status === 'Approved')
+    .reduce((sum, exp) => sum + exp.amount, 0);
+  
+  const pendingExpenses = expenses
+    .filter(exp => exp.status === 'Pending')
+    .reduce((sum, exp) => sum + exp.amount, 0);
+
+  // Calculate low stock items
+  const lowStockItems = rawMaterials.filter(
+    (material) => material.currentStock <= material.minStock
+  ).length;
+
+  const netProfit = dashboardStats.totalSales - totalExpenses;
+
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
@@ -96,15 +114,15 @@ const Dashboard = () => {
         Dashboard
       </Heading>
 
-      {/* Stats Grid */}
-      <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={{ base: 4, md: 6 }} mb={{ base: 6, md: 8 }}>
+      {/* Stats Grid - Income */}
+      <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={{ base: 4, md: 6 }} mb={{ base: 4, md: 6 }}>
         <StatCard
           title="Total Sales (This Month)"
           value={formatCurrency(dashboardStats.totalSales)}
-          icon={FiDollarSign}
+          icon={FiTrendingUp}
           change="12% vs last month"
           changeType="increase"
-          color="brand.primary"
+          color="green.500"
         />
         <StatCard
           title="Active Orders"
@@ -112,21 +130,57 @@ const Dashboard = () => {
           icon={FiShoppingCart}
           change="3 new today"
           changeType="increase"
-          color="accent.500"
+          color="blue.500"
+        />
+        <StatCard
+          title="Outstanding Receivables"
+          value={formatCurrency(dashboardStats.outstandingAmount)}
+          icon={FiAlertCircle}
+          change="2 overdue"
+          changeType="decrease"
+          color="orange.500"
+        />
+        <StatCard
+          title="Net Profit (Month)"
+          value={formatCurrency(netProfit)}
+          icon={FiDollarSign}
+          change="After expenses"
+          changeType={netProfit > 0 ? "increase" : "decrease"}
+          color={netProfit > 0 ? "brand.primary" : "red.500"}
+        />
+      </SimpleGrid>
+
+      {/* Stats Grid - Expenses */}
+      <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={{ base: 4, md: 6 }} mb={{ base: 6, md: 8 }}>
+        <StatCard
+          title="Total Expenses (This Month)"
+          value={formatCurrency(totalExpenses)}
+          icon={FiTrendingDown}
+          change="Paid + Approved"
+          changeType="decrease"
+          color="red.500"
+        />
+        <StatCard
+          title="Pending Expenses"
+          value={formatCurrency(pendingExpenses)}
+          icon={FiAlertCircle}
+          change="Awaiting approval"
+          changeType="decrease"
+          color="orange.500"
+        />
+        <StatCard
+          title="Low Stock Alerts"
+          value={lowStockItems}
+          icon={FiAlertCircle}
+          change="Raw materials"
+          changeType="decrease"
+          color="red.500"
         />
         <StatCard
           title="Pending Deliveries"
           value={dashboardStats.pendingDeliveries}
           icon={FiTruck}
           color="blue.500"
-        />
-        <StatCard
-          title="Outstanding Amount"
-          value={formatCurrency(dashboardStats.outstandingAmount)}
-          icon={FiAlertCircle}
-          change="2 overdue"
-          changeType="decrease"
-          color="orange.500"
         />
       </SimpleGrid>
 
