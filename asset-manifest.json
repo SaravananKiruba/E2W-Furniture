@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/saakar-furniture-app/static/css/main.ed00d2d0.css",
-    "main.js": "/saakar-furniture-app/static/js/main.ac933d17.js",
-    "static/js/453.b4d59b63.chunk.js": "/saakar-furniture-app/static/js/453.b4d59b63.chunk.js",
-    "index.html": "/saakar-furniture-app/index.html",
-    "main.ed00d2d0.css.map": "/saakar-furniture-app/static/css/main.ed00d2d0.css.map",
-    "main.ac933d17.js.map": "/saakar-furniture-app/static/js/main.ac933d17.js.map",
-    "453.b4d59b63.chunk.js.map": "/saakar-furniture-app/static/js/453.b4d59b63.chunk.js.map"
+    "main.css": "/E2W-Furniture/static/css/main.ed00d2d0.css",
+    "main.js": "/E2W-Furniture/static/js/main.0e754ba6.js",
+    "static/js/453.f02ce37b.chunk.js": "/E2W-Furniture/static/js/453.f02ce37b.chunk.js",
+    "index.html": "/E2W-Furniture/index.html",
+    "main.ed00d2d0.css.map": "/E2W-Furniture/static/css/main.ed00d2d0.css.map",
+    "main.0e754ba6.js.map": "/E2W-Furniture/static/js/main.0e754ba6.js.map",
+    "453.f02ce37b.chunk.js.map": "/E2W-Furniture/static/js/453.f02ce37b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ed00d2d0.css",
-    "static/js/main.ac933d17.js"
+    "static/js/main.0e754ba6.js"
   ]
 }
