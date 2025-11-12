@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/E2W-Furniture/static/css/main.ed00d2d0.css",
-    "main.js": "/E2W-Furniture/static/js/main.0e754ba6.js",
+    "main.js": "/E2W-Furniture/static/js/main.12d47ef0.js",
     "static/js/453.f02ce37b.chunk.js": "/E2W-Furniture/static/js/453.f02ce37b.chunk.js",
     "index.html": "/E2W-Furniture/index.html",
     "main.ed00d2d0.css.map": "/E2W-Furniture/static/css/main.ed00d2d0.css.map",
-    "main.0e754ba6.js.map": "/E2W-Furniture/static/js/main.0e754ba6.js.map",
+    "main.12d47ef0.js.map": "/E2W-Furniture/static/js/main.12d47ef0.js.map",
     "453.f02ce37b.chunk.js.map": "/E2W-Furniture/static/js/453.f02ce37b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ed00d2d0.css",
-    "static/js/main.0e754ba6.js"
+    "static/js/main.12d47ef0.js"
   ]
 }
