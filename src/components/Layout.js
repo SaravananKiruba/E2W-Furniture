@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
         right: 0,
         bottom: 0,
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover',
+        backgroundSize: '100% 100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed',
