@@ -116,7 +116,7 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
         color="white"
       >
         <Text fontSize="xl" fontWeight="bold" letterSpacing="tight">
-          Saakar Furniture
+          E2W Furniture
         </Text>
       </Flex>
 

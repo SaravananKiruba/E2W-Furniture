@@ -49,7 +49,7 @@ const Header = ({ onToggle }) => {
           color="brand.primary"
           display={{ base: 'block', sm: 'none' }}
         >
-          Saakar
+          E2W
         </Text>
       </HStack>
 

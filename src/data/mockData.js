@@ -1,4 +1,4 @@
-// Mock Data for Saakar Furniture Application
+// Mock Data for E2W Furniture Application
 
 // Customers
 export const customers = [

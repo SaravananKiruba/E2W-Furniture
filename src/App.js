@@ -21,7 +21,7 @@ import Expenses from './pages/Purchases/Expenses';
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme} resetCSS>
       <Router>
         <Layout>
           <Routes>
