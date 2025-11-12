@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { applyCSSVariables } from './constants/colors';
+
+// Apply CSS variables immediately on load to prevent color flash
+applyCSSVariables();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

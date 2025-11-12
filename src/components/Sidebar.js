@@ -54,7 +54,7 @@ const NavItem = ({ icon, children, to, isSubmenu = false, onClick }) => {
           color={isActive ? 'white' : 'gray.700'}
           bg={isActive ? 'brand.primary' : 'transparent'}
           _hover={{
-            bg: isActive ? 'brand.600' : 'rgba(184, 71, 23, 0.1)',
+            bg: isActive ? 'brand.600' : 'brand.50',
             color: isActive ? 'white' : 'brand.primary',
             transform: 'translateX(4px)',
           }}
@@ -85,7 +85,7 @@ const NavGroup = ({ icon, label, children }) => {
         cursor="pointer"
         color="gray.700"
         _hover={{ 
-          bg: 'rgba(184, 71, 23, 0.08)',
+          bg: 'brand.100',
           color: 'brand.primary',
         }}
         onClick={onToggle}

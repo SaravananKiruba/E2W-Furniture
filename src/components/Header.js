@@ -22,10 +22,10 @@ const Header = ({ onToggle }) => {
       justify="space-between"
       px={{ base: 3, md: 6 }}
       py={3}
-      bg="rgba(255, 255, 255, 0.95)"
+      bg="whiteAlpha.950"
       backdropFilter="blur(10px)"
       borderBottom="1px"
-      borderColor="rgba(184, 71, 23, 0.1)"
+      borderColor="brand.50"
       boxShadow="lg"
       h="16"
     >
@@ -36,7 +36,7 @@ const Header = ({ onToggle }) => {
           onClick={onToggle}
           aria-label="Toggle Navigation"
           color="brand.primary"
-          _hover={{ bg: 'rgba(184, 71, 23, 0.1)' }}
+          _hover={{ bg: 'brand.50' }}
         />
         <Text 
           fontSize={{ base: 'sm', md: 'lg' }} 

@@ -1,19 +1,20 @@
 import { extendTheme } from '@chakra-ui/react';
+import { BRAND_COLORS, GLASS_EFFECT } from './constants/colors';
 
 const theme = extendTheme({
   colors: {
     brand: {
-      primary: '#b84717',    // Burnt Orange - Primary brand color
-      secondary: '#d65a2e',  // Lighter Orange - Secondary/Accent
-      white: '#FFFFFF',      // White
-      brown: '#8b3a0e',      // Dark Brown - Tertiary
+      primary: BRAND_COLORS.primary,    // Burnt Orange - Primary brand color
+      secondary: BRAND_COLORS.secondary,  // Lighter Orange - Secondary/Accent
+      white: BRAND_COLORS.white,      // White
+      brown: BRAND_COLORS.brown,      // Dark Brown - Tertiary
       50: '#fef5f1',
       100: '#fde4d9',
       200: '#fbc9b3',
       300: '#f9ae8d',
       400: '#d97e47',
-      500: '#b84717',
-      600: '#9a3c13',
+      500: BRAND_COLORS.primary,
+      600: BRAND_COLORS.primaryHover,
       700: '#7c300f',
       800: '#5e240b',
       900: '#401807',
@@ -24,7 +25,7 @@ const theme = extendTheme({
       200: '#ffd6aa',
       300: '#ffc280',
       400: '#ff9f42',
-      500: '#d65a2e',
+      500: BRAND_COLORS.secondary,
       600: '#b84a26',
       700: '#9a3a1e',
       800: '#7c2a16',
@@ -107,19 +108,19 @@ const theme = extendTheme({
     Card: {
       baseStyle: {
         container: {
-          bg: 'rgba(255, 255, 255, 0.95)',
+          bg: GLASS_EFFECT.cardBg,
           backdropFilter: 'blur(10px)',
           borderRadius: 'lg',
           boxShadow: 'xl',
           border: '1px solid',
-          borderColor: 'rgba(184, 71, 23, 0.1)',
+          borderColor: BRAND_COLORS.primaryBorder,
         },
       },
     },
     Modal: {
       baseStyle: {
         dialog: {
-          bg: 'rgba(255, 255, 255, 0.98)',
+          bg: GLASS_EFFECT.modalBg,
           backdropFilter: 'blur(10px)',
         },
       },
