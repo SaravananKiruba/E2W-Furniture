@@ -1,16 +1,12 @@
 {
   "files": {
-    "main.css": "/E2W-Furniture/static/css/main.dcc28ef8.css",
-    "main.js": "/E2W-Furniture/static/js/main.93106258.js",
-    "static/js/453.f02ce37b.chunk.js": "/E2W-Furniture/static/js/453.f02ce37b.chunk.js",
-    "static/media/Backround.png": "/E2W-Furniture/static/media/Backround.b489e84fab617534f85f.png",
-    "index.html": "/E2W-Furniture/index.html",
-    "main.dcc28ef8.css.map": "/E2W-Furniture/static/css/main.dcc28ef8.css.map",
-    "main.93106258.js.map": "/E2W-Furniture/static/js/main.93106258.js.map",
-    "453.f02ce37b.chunk.js.map": "/E2W-Furniture/static/js/453.f02ce37b.chunk.js.map"
+    "main.css": "/E2W-Furniture/static/css/main.2dea3d85.css",
+    "main.js": "/E2W-Furniture/static/js/main.f9ee67f5.js",
+    "static/js/206.000f796a.chunk.js": "/E2W-Furniture/static/js/206.000f796a.chunk.js",
+    "index.html": "/E2W-Furniture/index.html"
   },
   "entrypoints": [
-    "static/css/main.dcc28ef8.css",
-    "static/js/main.93106258.js"
+    "static/css/main.2dea3d85.css",
+    "static/js/main.f9ee67f5.js"
   ]
 }
