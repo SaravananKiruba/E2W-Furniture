@@ -2,20 +2,20 @@
 
 // Customers
 export const customers = [
-  { id: 1, name: 'Rajesh Kumar', phone: '+91 98765 43210', email: 'rajesh.kumar@email.com', address: '123, MG Road, Bangalore', gstin: '29ABCDE1234F1Z5', type: 'Retail' },
-  { id: 2, name: 'Priya Sharma', phone: '+91 98765 43211', email: 'priya.sharma@email.com', address: '456, Brigade Road, Bangalore', gstin: '29FGHIJ5678K2L6', type: 'Retail' },
-  { id: 3, name: 'Arjun Patel', phone: '+91 98765 43212', email: 'arjun.patel@email.com', address: '789, Koramangala, Bangalore', gstin: '', type: 'Retail' },
-  { id: 4, name: 'Lakshmi Iyer', phone: '+91 98765 43213', email: 'lakshmi.iyer@email.com', address: '321, Indiranagar, Bangalore', gstin: '29MNOPQ9012R3S7', type: 'Retail' },
-  { id: 5, name: 'Vikram Reddy', phone: '+91 98765 43214', email: 'vikram.reddy@email.com', address: '654, Whitefield, Bangalore', gstin: '29TUVWX3456Y4Z8', type: 'Corporate' },
-  { id: 6, name: 'Ananya Das', phone: '+91 98765 43215', email: 'ananya.das@email.com', address: '987, JP Nagar, Bangalore', gstin: '', type: 'Retail' },
-  { id: 7, name: 'Rohan Mehta', phone: '+91 98765 43216', email: 'rohan.mehta@email.com', address: '147, HSR Layout, Bangalore', gstin: '29ABCXY7890Z5A9', type: 'Retail' },
-  { id: 8, name: 'Sneha Gupta', phone: '+91 98765 43217', email: 'sneha.gupta@email.com', address: '258, Malleshwaram, Bangalore', gstin: '', type: 'Retail' },
+  { id: 1, name: 'Rajesh Kumar', phone: '+91 98765 43210', email: 'rajesh.kumar@email.com', address: '123, MG Road, Bangalore', gstin: '29ABCDE1234F1Z5', type: 'Retail', birthday: '1985-03-15' },
+  { id: 2, name: 'Priya Sharma', phone: '+91 98765 43211', email: 'priya.sharma@email.com', address: '456, Brigade Road, Bangalore', gstin: '29FGHIJ5678K2L6', type: 'Retail', birthday: '1990-07-22' },
+  { id: 3, name: 'Arjun Patel', phone: '+91 98765 43212', email: 'arjun.patel@email.com', address: '789, Koramangala, Bangalore', gstin: '', type: 'Retail', birthday: '1988-11-30' },
+  { id: 4, name: 'Lakshmi Iyer', phone: '+91 98765 43213', email: 'lakshmi.iyer@email.com', address: '321, Indiranagar, Bangalore', gstin: '29MNOPQ9012R3S7', type: 'Retail', birthday: '1992-05-10' },
+  { id: 5, name: 'Vikram Reddy', phone: '+91 98765 43214', email: 'vikram.reddy@email.com', address: '654, Whitefield, Bangalore', gstin: '29TUVWX3456Y4Z8', type: 'Corporate', birthday: '1987-09-18' },
+  { id: 6, name: 'Ananya Das', phone: '+91 98765 43215', email: 'ananya.das@email.com', address: '987, JP Nagar, Bangalore', gstin: '', type: 'Retail', birthday: '1995-01-25' },
+  { id: 7, name: 'Rohan Mehta', phone: '+91 98765 43216', email: 'rohan.mehta@email.com', address: '147, HSR Layout, Bangalore', gstin: '29ABCXY7890Z5A9', type: 'Retail', birthday: '1989-12-08' },
+  { id: 8, name: 'Sneha Gupta', phone: '+91 98765 43217', email: 'sneha.gupta@email.com', address: '258, Malleshwaram, Bangalore', gstin: '', type: 'Retail', birthday: '1993-04-14' },
 ];
 
 // Products
 export const products = [
   { 
-    id: 1, sku: 'SF-SOF-001', name: 'Premium Leather Sofa 3-Seater', category: 'Sofa', price: 85000, stock: 5, status: 'Ready', location: 'Showroom A',
+    id: 1, sku: 'SF-SOF-001', name: 'Premium Leather Sofa 3-Seater', category: 'Sofa', price: 85000, stock: 5, status: 'Ready', location: 'Showroom A', image: 'https://via.placeholder.com/300x200?text=Leather+Sofa',
     bom: [
       { materialCode: 'RM-WOOD-001', materialName: 'Teak Wood Plank', quantity: 35, unit: 'Sq Ft', unitCost: 350 },
       { materialCode: 'RM-FAB-001', materialName: 'Premium Leather (Brown)', quantity: 45, unit: 'Sq Ft', unitCost: 450 },
@@ -25,7 +25,7 @@ export const products = [
     ]
   },
   { 
-    id: 2, sku: 'SF-BED-001', name: 'King Size Teak Wood Bed', category: 'Bed', price: 65000, stock: 3, status: 'Ready', location: 'Showroom B',
+    id: 2, sku: 'SF-BED-001', name: 'King Size Teak Wood Bed', category: 'Bed', price: 65000, stock: 3, status: 'Ready', location: 'Showroom B', image: 'https://via.placeholder.com/300x200?text=Teak+Bed',
     bom: [
       { materialCode: 'RM-WOOD-001', materialName: 'Teak Wood Plank', quantity: 65, unit: 'Sq Ft', unitCost: 350 },
       { materialCode: 'RM-HW-001', materialName: 'Hinges - Heavy Duty', quantity: 4, unit: 'Piece', unitCost: 45 },
@@ -34,7 +34,7 @@ export const products = [
     ]
   },
   { 
-    id: 3, sku: 'SF-DIN-001', name: '6-Seater Dining Table Set', category: 'Dining', price: 95000, stock: 2, status: 'On Display', location: 'Showroom A',
+    id: 3, sku: 'SF-DIN-001', name: '6-Seater Dining Table Set', category: 'Dining', price: 95000, stock: 2, status: 'On Display', location: 'Showroom A', image: 'https://via.placeholder.com/300x200?text=Dining+Table',
     bom: [
       { materialCode: 'RM-WOOD-002', materialName: 'Sheesham Wood Plank', quantity: 85, unit: 'Sq Ft', unitCost: 280 },
       { materialCode: 'RM-HW-003', materialName: 'Screws - Assorted Pack', quantity: 3, unit: 'Box', unitCost: 120 },
@@ -43,7 +43,7 @@ export const products = [
     ]
   },
   { 
-    id: 4, sku: 'SF-WAR-001', name: '4-Door Sliding Wardrobe', category: 'Wardrobe', price: 75000, stock: 4, status: 'Ready', location: 'Warehouse',
+    id: 4, sku: 'SF-WAR-001', name: '4-Door Sliding Wardrobe', category: 'Wardrobe', price: 75000, stock: 4, status: 'Ready', location: 'Warehouse', image: 'https://via.placeholder.com/300x200?text=Wardrobe',
     bom: [
       { materialCode: 'RM-WOOD-001', materialName: 'Teak Wood Plank', quantity: 120, unit: 'Sq Ft', unitCost: 350 },
       { materialCode: 'RM-HW-002', materialName: 'Sliding Rails 6ft', quantity: 2, unit: 'Piece', unitCost: 850 },
@@ -53,7 +53,7 @@ export const products = [
     ]
   },
   { 
-    id: 5, sku: 'SF-CHR-001', name: 'Executive Office Chair', category: 'Chair', price: 25000, stock: 8, status: 'Ready', location: 'Showroom B',
+    id: 5, sku: 'SF-CHR-001', name: 'Executive Office Chair', category: 'Chair', price: 25000, stock: 8, status: 'Ready', location: 'Showroom B', image: 'https://via.placeholder.com/300x200?text=Office+Chair',
     bom: [
       { materialCode: 'RM-WOOD-002', materialName: 'Sheesham Wood Plank', quantity: 12, unit: 'Sq Ft', unitCost: 280 },
       { materialCode: 'RM-FAB-001', materialName: 'Premium Leather (Brown)', quantity: 8, unit: 'Sq Ft', unitCost: 450 },
@@ -61,11 +61,11 @@ export const products = [
       { materialCode: 'RM-HW-003', materialName: 'Screws - Assorted Pack', quantity: 1, unit: 'Box', unitCost: 120 },
     ]
   },
-  { id: 6, sku: 'SF-TAB-001', name: 'Coffee Table - Marble Top', category: 'Table', price: 18000, stock: 6, status: 'Ready', location: 'Showroom A' },
-  { id: 7, sku: 'SF-SOF-002', name: 'L-Shape Sectional Sofa', category: 'Sofa', price: 120000, stock: 2, status: 'Reserved', location: 'Showroom A' },
-  { id: 8, sku: 'SF-BED-002', name: 'Queen Size Storage Bed', category: 'Bed', price: 55000, stock: 5, status: 'Ready', location: 'Warehouse' },
-  { id: 9, sku: 'SF-DIN-002', name: '4-Seater Dining Table', category: 'Dining', price: 45000, stock: 4, status: 'Ready', location: 'Showroom B' },
-  { id: 10, sku: 'SF-REC-001', name: 'Recliner Chair - Brown Leather', category: 'Chair', price: 42000, stock: 3, status: 'On Display', location: 'Showroom A' },
+  { id: 6, sku: 'SF-TAB-001', name: 'Coffee Table - Marble Top', category: 'Table', price: 18000, stock: 6, status: 'Ready', location: 'Showroom A', image: 'https://via.placeholder.com/300x200?text=Coffee+Table' },
+  { id: 7, sku: 'SF-SOF-002', name: 'L-Shape Sectional Sofa', category: 'Sofa', price: 120000, stock: 2, status: 'Reserved', location: 'Showroom A', image: 'https://via.placeholder.com/300x200?text=L-Shape+Sofa' },
+  { id: 8, sku: 'SF-BED-002', name: 'Queen Size Storage Bed', category: 'Bed', price: 55000, stock: 5, status: 'Ready', location: 'Warehouse', image: 'https://via.placeholder.com/300x200?text=Storage+Bed' },
+  { id: 9, sku: 'SF-DIN-002', name: '4-Seater Dining Table', category: 'Dining', price: 45000, stock: 4, status: 'Ready', location: 'Showroom B', image: 'https://via.placeholder.com/300x200?text=4-Seater+Dining' },
+  { id: 10, sku: 'SF-REC-001', name: 'Recliner Chair - Brown Leather', category: 'Chair', price: 42000, stock: 3, status: 'On Display', location: 'Showroom A', image: 'https://via.placeholder.com/300x200?text=Recliner' },
 ];
 
 // Inquiries
@@ -79,10 +79,10 @@ export const inquiries = [
 
 // Quotations
 export const quotations = [
-  { id: 1, quotationNo: 'QT-2025-001', customerId: 1, customerName: 'Rajesh Kumar', date: '2025-11-02', validUntil: '2025-11-16', items: [{ productId: 1, productName: 'Premium Leather Sofa 3-Seater', quantity: 1, price: 85000 }, { productId: 6, productName: 'Coffee Table - Marble Top', quantity: 1, price: 18000 }], subtotal: 103000, discount: 3000, tax: 18000, total: 118000, status: 'Sent' },
-  { id: 2, quotationNo: 'QT-2025-002', customerId: 3, customerName: 'Arjun Patel', date: '2025-11-04', validUntil: '2025-11-18', items: [{ productId: 3, productName: '6-Seater Dining Table Set', quantity: 1, price: 95000 }], subtotal: 95000, discount: 5000, tax: 16200, total: 106200, status: 'Accepted' },
-  { id: 3, quotationNo: 'QT-2025-003', customerId: 6, customerName: 'Ananya Das', date: '2025-11-06', validUntil: '2025-11-20', items: [{ productId: 4, productName: '4-Door Sliding Wardrobe', quantity: 1, price: 75000 }], subtotal: 75000, discount: 2000, tax: 13140, total: 86140, status: 'Draft' },
-  { id: 4, quotationNo: 'QT-2025-004', customerId: 4, customerName: 'Lakshmi Iyer', date: '2025-11-09', validUntil: '2025-11-23', items: [{ productId: 10, productName: 'Recliner Chair - Brown Leather', quantity: 2, price: 42000 }], subtotal: 84000, discount: 4000, tax: 14400, total: 94400, status: 'Sent' },
+  { id: 1, quotationNo: 'QT-2025-001', revision: 0, customerId: 1, customerName: 'Rajesh Kumar', date: '2025-11-02', validUntil: '2025-11-16', items: [{ productId: 1, productName: 'Premium Leather Sofa 3-Seater', quantity: 1, price: 85000 }, { productId: 6, productName: 'Coffee Table - Marble Top', quantity: 1, price: 18000 }], subtotal: 103000, discount: 3000, tax: 18000, total: 118000, status: 'Sent', revisionHistory: [] },
+  { id: 2, quotationNo: 'QT-2025-002', revision: 1, customerId: 3, customerName: 'Arjun Patel', date: '2025-11-04', validUntil: '2025-11-18', items: [{ productId: 3, productName: '6-Seater Dining Table Set', quantity: 1, price: 95000 }], subtotal: 95000, discount: 5000, tax: 16200, total: 106200, status: 'Accepted', revisionHistory: [{ revisionNo: 0, date: '2025-11-04', total: 111200, remarks: 'Initial quote' }] },
+  { id: 3, quotationNo: 'QT-2025-003', revision: 0, customerId: 6, customerName: 'Ananya Das', date: '2025-11-06', validUntil: '2025-11-20', items: [{ productId: 4, productName: '4-Door Sliding Wardrobe', quantity: 1, price: 75000 }], subtotal: 75000, discount: 2000, tax: 13140, total: 86140, status: 'Draft', revisionHistory: [] },
+  { id: 4, quotationNo: 'QT-2025-004', revision: 2, customerId: 4, customerName: 'Lakshmi Iyer', date: '2025-11-09', validUntil: '2025-11-23', items: [{ productId: 10, productName: 'Recliner Chair - Brown Leather', quantity: 2, price: 42000 }], subtotal: 84000, discount: 4000, tax: 14400, total: 94400, status: 'Sent', revisionHistory: [{ revisionNo: 0, date: '2025-11-09', total: 98400, remarks: 'Initial quote' }, { revisionNo: 1, date: '2025-11-10', total: 96400, remarks: 'Discount increased' }] },
 ];
 
 // Sales Orders
@@ -155,14 +155,14 @@ export const rawMaterials = [
 
 // Vendors
 export const vendors = [
-  { id: 1, name: 'Karnataka Wood Suppliers', category: 'Wood Supplier', phone: '+91 98765 55001', email: 'info@karnatakawood.com', address: '45, Industrial Area, Peenya, Bangalore', gstin: '29AABCK5678M1Z2', paymentTerms: 'Net 30', totalPurchases: 1850000, outstandingAmount: 125000, status: 'Active', lastPurchaseDate: '2025-11-05' },
-  { id: 2, name: 'Leather House Bangalore', category: 'Leather Supplier', phone: '+91 98765 55002', email: 'sales@leatherhouse.in', address: '78, KR Market, Bangalore', gstin: '29BBCDE1234F2Z3', paymentTerms: 'Net 15', totalPurchases: 980000, outstandingAmount: 45000, status: 'Active', lastPurchaseDate: '2025-10-28' },
-  { id: 3, name: 'Fabric World', category: 'Fabric Supplier', phone: '+91 98765 55003', email: 'orders@fabricworld.com', address: '123, Commercial Street, Bangalore', gstin: '29CCDDE5678G3Z4', paymentTerms: 'Net 30', totalPurchases: 650000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-08' },
-  { id: 4, name: 'Comfort Foam Industries', category: 'Foam Supplier', phone: '+91 98765 55004', email: 'contact@comfortfoam.in', address: '56, Bommasandra Industrial Area, Bangalore', gstin: '29DDEEF9012H4Z5', paymentTerms: 'Net 7', totalPurchases: 420000, outstandingAmount: 38000, status: 'Active', lastPurchaseDate: '2025-10-25' },
-  { id: 5, name: 'Modern Hardware Store', category: 'Hardware Supplier', phone: '+91 98765 55005', email: 'sales@modernhardware.com', address: '234, KR Puram, Bangalore', gstin: '29EEFFG3456I5Z6', paymentTerms: 'Cash', totalPurchases: 850000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-10' },
-  { id: 6, name: 'Asian Paints', category: 'Paint & Finish', phone: '+91 98765 55006', email: 'bangalore@asianpaints.com', address: '89, Whitefield Road, Bangalore', gstin: '29FFGGH7890J6Z7', paymentTerms: 'Net 15', totalPurchases: 280000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-06' },
-  { id: 7, name: 'Designer Hardware', category: 'Accessories', phone: '+91 98765 55007', email: 'info@designerhardware.in', address: '67, Indiranagar, Bangalore', gstin: '29GGHHI1234K7Z8', paymentTerms: 'Net 30', totalPurchases: 320000, outstandingAmount: 28000, status: 'Active', lastPurchaseDate: '2025-11-03' },
-  { id: 8, name: 'Quick Transport Services', category: 'Logistics', phone: '+91 98765 55008', email: 'bookings@quicktransport.com', address: '12, Transport Nagar, Bangalore', gstin: '29HHIII5678L8Z9', paymentTerms: 'Net 7', totalPurchases: 180000, outstandingAmount: 12000, status: 'Active', lastPurchaseDate: '2025-11-09' },
+  { id: 1, name: 'Karnataka Wood Suppliers', category: 'Wood Supplier', phone: '+91 98765 55001', email: 'info@karnatakawood.com', address: '45, Industrial Area, Peenya, Bangalore', gstin: '29AABCK5678M1Z2', paymentTerms: 'Net 30', creditDays: 30, totalPurchases: 1850000, outstandingAmount: 125000, status: 'Active', lastPurchaseDate: '2025-11-05', dueDate: '2025-12-05' },
+  { id: 2, name: 'Leather House Bangalore', category: 'Leather Supplier', phone: '+91 98765 55002', email: 'sales@leatherhouse.in', address: '78, KR Market, Bangalore', gstin: '29BBCDE1234F2Z3', paymentTerms: 'Net 15', creditDays: 15, totalPurchases: 980000, outstandingAmount: 45000, status: 'Active', lastPurchaseDate: '2025-10-28', dueDate: '2025-11-12' },
+  { id: 3, name: 'Fabric World', category: 'Fabric Supplier', phone: '+91 98765 55003', email: 'orders@fabricworld.com', address: '123, Commercial Street, Bangalore', gstin: '29CCDDE5678G3Z4', paymentTerms: 'Net 30', creditDays: 30, totalPurchases: 650000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-08', dueDate: null },
+  { id: 4, name: 'Comfort Foam Industries', category: 'Foam Supplier', phone: '+91 98765 55004', email: 'contact@comfortfoam.in', address: '56, Bommasandra Industrial Area, Bangalore', gstin: '29DDEEF9012H4Z5', paymentTerms: 'Net 7', creditDays: 7, totalPurchases: 420000, outstandingAmount: 38000, status: 'Active', lastPurchaseDate: '2025-10-25', dueDate: '2025-11-01' },
+  { id: 5, name: 'Modern Hardware Store', category: 'Hardware Supplier', phone: '+91 98765 55005', email: 'sales@modernhardware.com', address: '234, KR Puram, Bangalore', gstin: '29EEFFG3456I5Z6', paymentTerms: 'Cash', creditDays: 0, totalPurchases: 850000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-10', dueDate: null },
+  { id: 6, name: 'Asian Paints', category: 'Paint & Finish', phone: '+91 98765 55006', email: 'bangalore@asianpaints.com', address: '89, Whitefield Road, Bangalore', gstin: '29FFGGH7890J6Z7', paymentTerms: 'Net 15', creditDays: 15, totalPurchases: 280000, outstandingAmount: 0, status: 'Active', lastPurchaseDate: '2025-11-06', dueDate: null },
+  { id: 7, name: 'Designer Hardware', category: 'Accessories', phone: '+91 98765 55007', email: 'info@designerhardware.in', address: '67, Indiranagar, Bangalore', gstin: '29GGHHI1234K7Z8', paymentTerms: 'Net 30', creditDays: 30, totalPurchases: 320000, outstandingAmount: 28000, status: 'Active', lastPurchaseDate: '2025-11-03', dueDate: '2025-12-03' },
+  { id: 8, name: 'Quick Transport Services', category: 'Logistics', phone: '+91 98765 55008', email: 'bookings@quicktransport.com', address: '12, Transport Nagar, Bangalore', gstin: '29HHIII5678L8Z9', paymentTerms: 'Net 7', creditDays: 7, totalPurchases: 180000, outstandingAmount: 12000, status: 'Active', lastPurchaseDate: '2025-11-09', dueDate: '2025-11-16' },
 ];
 
 // Purchase Orders

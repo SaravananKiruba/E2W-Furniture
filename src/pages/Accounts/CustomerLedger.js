@@ -15,14 +15,18 @@ import {
   IconButton,
   Badge,
   Text,
+  useToast,
+  Tooltip,
+  Button,
 } from '@chakra-ui/react';
-import { FiEye, FiDownload } from 'react-icons/fi';
-import { customerLedger as initialLedger } from '../../data/mockData';
+import { FiEye, FiDownload, FiSend, FiFileText } from 'react-icons/fi';
+import { customerLedger as initialLedger, customers } from '../../data/mockData';
 
 const CustomerLedger = () => {
   const [ledger] = useState(initialLedger);
   const [filteredLedger, setFilteredLedger] = useState(initialLedger);
   const [searchTerm, setSearchTerm] = useState('');
+  const toast = useToast();
 
   React.useEffect(() => {
     if (searchTerm) {
@@ -41,6 +45,54 @@ const CustomerLedger = () => {
       currency: 'INR',
       maximumFractionDigits: 0,
     }).format(amount);
+  };
+
+  const handleDownloadPDF = (entry) => {
+    // Simulate PDF generation
+    toast({
+      title: 'Downloading Statement',
+      description: `Generating PDF statement for ${entry.customerName}`,
+      status: 'info',
+      duration: 2000,
+      isClosable: true,
+    });
+    
+    setTimeout(() => {
+      toast({
+        title: 'Download Complete',
+        description: 'Statement PDF downloaded successfully',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
+    }, 1500);
+  };
+
+  const handleSendPaymentFollowup = (entry) => {
+    const customer = customers.find((c) => c.id === entry.customerId);
+    if (!customer) {
+      toast({
+        title: 'Error',
+        description: 'Customer contact not found',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    const message = `Dear ${entry.customerName},\n\nThis is a payment reminder from Saakaar Furniture.\n\nOutstanding Amount: ${formatCurrency(entry.balance)}\nTotal Orders: ${formatCurrency(entry.totalOrders)}\nAmount Paid: ${formatCurrency(entry.totalPaid)}\n\nKindly make the payment at your earliest convenience.\n\nThank you!\nSaakaar Furniture Team`;
+    
+    const whatsappUrl = `https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+
+    toast({
+      title: 'Payment Followup Sent',
+      description: `WhatsApp followup sent to ${entry.customerName}`,
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   const totalOrders = filteredLedger.reduce((sum, entry) => sum + entry.totalOrders, 0);
@@ -116,19 +168,36 @@ const CustomerLedger = () => {
                     </Td>
                     <Td>
                       <HStack spacing={2}>
-                        <IconButton
-                          icon={<FiEye />}
-                          size="sm"
-                          variant="ghost"
-                          aria-label="View Details"
-                        />
-                        <IconButton
-                          icon={<FiDownload />}
-                          size="sm"
-                          variant="ghost"
-                          colorScheme="blue"
-                          aria-label="Download Statement"
-                        />
+                        <Tooltip label="View Details">
+                          <IconButton
+                            icon={<FiEye />}
+                            size="sm"
+                            variant="ghost"
+                            aria-label="View Details"
+                          />
+                        </Tooltip>
+                        <Tooltip label="Download PDF Statement">
+                          <IconButton
+                            icon={<FiDownload />}
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="blue"
+                            onClick={() => handleDownloadPDF(entry)}
+                            aria-label="Download Statement"
+                          />
+                        </Tooltip>
+                        {entry.balance > 0 && (
+                          <Tooltip label="Send Payment Followup via WhatsApp">
+                            <IconButton
+                              icon={<FiSend />}
+                              size="sm"
+                              variant="ghost"
+                              colorScheme="green"
+                              onClick={() => handleSendPaymentFollowup(entry)}
+                              aria-label="Send Followup"
+                            />
+                          </Tooltip>
+                        )}
                       </HStack>
                     </Td>
                   </Tr>

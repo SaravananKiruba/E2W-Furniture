@@ -30,8 +30,13 @@ import {
   FormControl,
   FormLabel,
   Divider,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Tooltip,
 } from '@chakra-ui/react';
-import { FiPlus, FiEye, FiEdit, FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
+import { FiPlus, FiEye, FiEdit, FiPhone, FiMail, FiMapPin, FiAlertCircle, FiClock } from 'react-icons/fi';
 import { vendors as initialVendors } from '../data/mockData';
 
 const Vendors = () => {
@@ -105,6 +110,31 @@ const Vendors = () => {
   const totalOutstanding = vendors.reduce((sum, vendor) => sum + vendor.outstandingAmount, 0);
   const activeVendors = vendors.filter((v) => v.status === 'Active').length;
 
+  // Calculate overdue payments
+  const today = new Date();
+  const overdueVendors = vendors.filter((v) => {
+    if (!v.dueDate || v.outstandingAmount === 0) return false;
+    const dueDate = new Date(v.dueDate);
+    return dueDate < today;
+  });
+
+  const dueSoonVendors = vendors.filter((v) => {
+    if (!v.dueDate || v.outstandingAmount === 0) return false;
+    const dueDate = new Date(v.dueDate);
+    const daysDiff = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+    return daysDiff >= 0 && daysDiff <= 3;
+  });
+
+  const getPaymentStatus = (vendor) => {
+    if (!vendor.dueDate || vendor.outstandingAmount === 0) return null;
+    const dueDate = new Date(vendor.dueDate);
+    const daysDiff = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+    
+    if (daysDiff < 0) return { status: 'overdue', days: Math.abs(daysDiff), color: 'red' };
+    if (daysDiff <= 3) return { status: 'due-soon', days: daysDiff, color: 'orange' };
+    return { status: 'ok', days: daysDiff, color: 'green' };
+  };
+
   return (
     <Box>
       <HStack justify="space-between" mb={6}>
@@ -115,6 +145,34 @@ const Vendors = () => {
           Add Vendor
         </Button>
       </HStack>
+
+      {/* Payment Alerts */}
+      {(overdueVendors.length > 0 || dueSoonVendors.length > 0) && (
+        <VStack spacing={3} mb={6}>
+          {overdueVendors.length > 0 && (
+            <Alert status="error" borderRadius="md">
+              <AlertIcon />
+              <Box flex="1">
+                <AlertTitle>Overdue Payments!</AlertTitle>
+                <AlertDescription>
+                  {overdueVendors.length} vendor payment(s) overdue: {overdueVendors.map(v => v.name).join(', ')}
+                </AlertDescription>
+              </Box>
+            </Alert>
+          )}
+          {dueSoonVendors.length > 0 && (
+            <Alert status="warning" borderRadius="md">
+              <AlertIcon />
+              <Box flex="1">
+                <AlertTitle>Payments Due Soon</AlertTitle>
+                <AlertDescription>
+                  {dueSoonVendors.length} payment(s) due within 3 days: {dueSoonVendors.map(v => v.name).join(', ')}
+                </AlertDescription>
+              </Box>
+            </Alert>
+          )}
+        </VStack>
+      )}
 
       {/* Summary Cards */}
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4} mb={6}>
@@ -212,54 +270,90 @@ const Vendors = () => {
                   <Th>Category</Th>
                   <Th>Contact</Th>
                   <Th>Email</Th>
-                  <Th>GSTIN</Th>
+                  <Th>Payment Terms</Th>
+                  <Th>Due Date</Th>
                   <Th isNumeric>Outstanding</Th>
                   <Th>Status</Th>
                   <Th>Actions</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                {filteredVendors.map((vendor) => (
-                  <Tr key={vendor.id}>
-                    <Td fontWeight="600">{vendor.name}</Td>
-                    <Td>
-                      <Badge colorScheme="purple">{vendor.category}</Badge>
-                    </Td>
-                    <Td>
-                      <HStack spacing={1}>
-                        <FiPhone size={14} />
-                        <Text fontSize="sm">{vendor.phone}</Text>
-                      </HStack>
-                    </Td>
-                    <Td fontSize="sm">{vendor.email}</Td>
-                    <Td fontSize="sm">{vendor.gstin || '-'}</Td>
-                    <Td isNumeric fontWeight="600" color={vendor.outstandingAmount > 0 ? 'red.500' : 'green.600'}>
-                      {formatCurrency(vendor.outstandingAmount)}
-                    </Td>
-                    <Td>
-                      <Badge colorScheme={getStatusColor(vendor.status)}>
-                        {vendor.status}
-                      </Badge>
-                    </Td>
-                    <Td>
-                      <HStack spacing={2}>
-                        <IconButton
-                          icon={<FiEye />}
-                          size="sm"
-                          variant="ghost"
-                          colorScheme="blue"
-                          onClick={() => handleView(vendor)}
-                        />
-                        <IconButton
-                          icon={<FiEdit />}
-                          size="sm"
-                          variant="ghost"
-                          colorScheme="green"
-                        />
-                      </HStack>
-                    </Td>
-                  </Tr>
-                ))}
+                {filteredVendors.map((vendor) => {
+                  const paymentStatus = getPaymentStatus(vendor);
+                  return (
+                    <Tr key={vendor.id} bg={paymentStatus?.status === 'overdue' ? 'red.50' : paymentStatus?.status === 'due-soon' ? 'orange.50' : 'transparent'}>
+                      <Td fontWeight="600">{vendor.name}</Td>
+                      <Td>
+                        <Badge colorScheme="purple">{vendor.category}</Badge>
+                      </Td>
+                      <Td>
+                        <HStack spacing={1}>
+                          <FiPhone size={14} />
+                          <Text fontSize="sm">{vendor.phone}</Text>
+                        </HStack>
+                      </Td>
+                      <Td fontSize="sm">{vendor.email}</Td>
+                      <Td>
+                        <HStack>
+                          <FiClock size={14} />
+                          <Text fontSize="sm" fontWeight="500">{vendor.paymentTerms}</Text>
+                        </HStack>
+                      </Td>
+                      <Td>
+                        {vendor.dueDate && vendor.outstandingAmount > 0 ? (
+                          <HStack>
+                            {paymentStatus?.status === 'overdue' && (
+                              <Tooltip label={`Overdue by ${paymentStatus.days} days`}>
+                                <Badge colorScheme="red" display="flex" alignItems="center">
+                                  <FiAlertCircle style={{ marginRight: '4px' }} />
+                                  {vendor.dueDate}
+                                </Badge>
+                              </Tooltip>
+                            )}
+                            {paymentStatus?.status === 'due-soon' && (
+                              <Tooltip label={`Due in ${paymentStatus.days} days`}>
+                                <Badge colorScheme="orange" display="flex" alignItems="center">
+                                  <FiAlertCircle style={{ marginRight: '4px' }} />
+                                  {vendor.dueDate}
+                                </Badge>
+                              </Tooltip>
+                            )}
+                            {paymentStatus?.status === 'ok' && (
+                              <Text fontSize="sm">{vendor.dueDate}</Text>
+                            )}
+                          </HStack>
+                        ) : (
+                          <Text fontSize="sm" color="gray.400">-</Text>
+                        )}
+                      </Td>
+                      <Td isNumeric fontWeight="600" color={vendor.outstandingAmount > 0 ? 'red.500' : 'green.600'}>
+                        {formatCurrency(vendor.outstandingAmount)}
+                      </Td>
+                      <Td>
+                        <Badge colorScheme={getStatusColor(vendor.status)}>
+                          {vendor.status}
+                        </Badge>
+                      </Td>
+                      <Td>
+                        <HStack spacing={2}>
+                          <IconButton
+                            icon={<FiEye />}
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="blue"
+                            onClick={() => handleView(vendor)}
+                          />
+                          <IconButton
+                            icon={<FiEdit />}
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="green"
+                          />
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  );
+                })}
               </Tbody>
             </Table>
           </Box>
@@ -340,8 +434,31 @@ const Vendors = () => {
                     <Text fontSize="sm" color="gray.600">
                       Payment Terms
                     </Text>
-                    <Text fontWeight="bold">{selectedVendor.paymentTerms}</Text>
+                    <HStack>
+                      <FiClock />
+                      <Text fontWeight="bold">{selectedVendor.paymentTerms}</Text>
+                      <Badge colorScheme="blue">{selectedVendor.creditDays} days</Badge>
+                    </HStack>
                   </Box>
+                  {selectedVendor.dueDate && selectedVendor.outstandingAmount > 0 && (
+                    <Box gridColumn="span 2">
+                      <Text fontSize="sm" color="gray.600">Payment Due Date</Text>
+                      {(() => {
+                        const paymentStatus = getPaymentStatus(selectedVendor);
+                        return (
+                          <HStack>
+                            <Text fontWeight="bold">{selectedVendor.dueDate}</Text>
+                            {paymentStatus?.status === 'overdue' && (
+                              <Badge colorScheme="red">Overdue by {paymentStatus.days} days</Badge>
+                            )}
+                            {paymentStatus?.status === 'due-soon' && (
+                              <Badge colorScheme="orange">Due in {paymentStatus.days} days</Badge>
+                            )}
+                          </HStack>
+                        );
+                      })()}
+                    </Box>
+                  )}
                 </SimpleGrid>
 
                 <Divider />

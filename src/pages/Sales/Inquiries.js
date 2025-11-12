@@ -152,6 +152,7 @@ const Inquiries = () => {
                   <Th>ID</Th>
                   <Th>Date</Th>
                   <Th>Customer Name</Th>
+                  <Th>Contact</Th>
                   <Th>Items of Interest</Th>
                   <Th>Status</Th>
                   <Th>Assigned To</Th>
@@ -164,6 +165,9 @@ const Inquiries = () => {
                     <Td fontWeight="600">#{inquiry.id}</Td>
                     <Td>{inquiry.date}</Td>
                     <Td>{inquiry.customerName}</Td>
+                    <Td>
+                      <Text fontSize="sm" fontWeight="500">{inquiry.phone || '-'}</Text>
+                    </Td>
                     <Td>{inquiry.items}</Td>
                     <Td>
                       <Badge colorScheme={getStatusColor(inquiry.status)}>
@@ -296,6 +300,12 @@ const Inquiries = () => {
                       Customer Name
                     </Text>
                     <Text fontWeight="600">{selectedInquiry.customerName}</Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" color="gray.600">
+                      Contact
+                    </Text>
+                    <Text fontWeight="600">{selectedInquiry.phone || 'Not provided'}</Text>
                   </Box>
                   <Box>
                     <Text fontSize="sm" color="gray.600">

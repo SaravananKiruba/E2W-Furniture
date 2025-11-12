@@ -3,32 +3,32 @@ import { extendTheme } from '@chakra-ui/react';
 const theme = extendTheme({
   colors: {
     brand: {
-      primary: '#5F3277',    // Purple - Primary brand color
-      secondary: '#E58B2E',  // Orange - Secondary/Accent
+      primary: '#b84717',    // Burnt Orange - Primary brand color
+      secondary: '#d65a2e',  // Lighter Orange - Secondary/Accent
       white: '#FFFFFF',      // White
-      brown: '#A87C49',      // Brown - Tertiary
-      50: '#F5F0F8',
-      100: '#E6D9EE',
-      200: '#D7C2E3',
-      300: '#C8ABD9',
-      400: '#9468A8',
-      500: '#5F3277',
-      600: '#4D2860',
-      700: '#3A1E48',
-      800: '#271430',
-      900: '#140A18',
+      brown: '#8b3a0e',      // Dark Brown - Tertiary
+      50: '#fef5f1',
+      100: '#fde4d9',
+      200: '#fbc9b3',
+      300: '#f9ae8d',
+      400: '#d97e47',
+      500: '#b84717',
+      600: '#9a3c13',
+      700: '#7c300f',
+      800: '#5e240b',
+      900: '#401807',
     },
     accent: {
-      50: '#FDF5E9',
-      100: '#FAE6C8',
-      200: '#F6D6A6',
-      300: '#F3C785',
-      400: '#EFA757',
-      500: '#E58B2E',
-      600: '#C47425',
-      700: '#92571B',
-      800: '#613A12',
-      900: '#311D09',
+      50: '#fff8f1',
+      100: '#ffead4',
+      200: '#ffd6aa',
+      300: '#ffc280',
+      400: '#ff9f42',
+      500: '#d65a2e',
+      600: '#b84a26',
+      700: '#9a3a1e',
+      800: '#7c2a16',
+      900: '#5e1a0e',
     }
   },
   fonts: {
@@ -46,8 +46,13 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'gray.50',
-        color: 'gray.800',
+        bg: 'transparent',
+        color: 'gray.100',
+        backgroundImage: 'url(/src/assets/Backround.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
       },
       '*': {
         boxSizing: 'border-box',
@@ -65,13 +70,17 @@ const theme = extendTheme({
           color: 'white',
           _hover: {
             bg: 'brand.600',
+            transform: 'translateY(-1px)',
+            boxShadow: 'lg',
           },
+          transition: 'all 0.2s',
         },
         outline: {
           borderColor: 'brand.primary',
           color: 'brand.primary',
           _hover: {
-            bg: 'brand.50',
+            bg: 'brand.primary',
+            color: 'white',
           },
         },
         secondary: {
@@ -92,6 +101,26 @@ const theme = extendTheme({
         secondary: {
           bg: 'accent.500',
           color: 'white',
+        },
+      },
+    },
+    Card: {
+      baseStyle: {
+        container: {
+          bg: 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(10px)',
+          borderRadius: 'lg',
+          boxShadow: 'xl',
+          border: '1px solid',
+          borderColor: 'rgba(184, 71, 23, 0.1)',
+        },
+      },
+    },
+    Modal: {
+      baseStyle: {
+        dialog: {
+          bg: 'rgba(255, 255, 255, 0.98)',
+          backdropFilter: 'blur(10px)',
         },
       },
     },

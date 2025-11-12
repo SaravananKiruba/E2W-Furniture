@@ -51,11 +51,12 @@ const NavItem = ({ icon, children, to, isSubmenu = false, onClick }) => {
           px={isSubmenu ? 8 : 4}
           py={3}
           cursor="pointer"
-          color={isActive ? 'white' : 'gray.600'}
+          color={isActive ? 'white' : 'gray.700'}
           bg={isActive ? 'brand.primary' : 'transparent'}
           _hover={{
-            bg: isActive ? 'brand.600' : 'gray.100',
+            bg: isActive ? 'brand.600' : 'rgba(184, 71, 23, 0.1)',
             color: isActive ? 'white' : 'brand.primary',
+            transform: 'translateX(4px)',
           }}
           role="group"
           transition="all 0.2s"
@@ -83,11 +84,15 @@ const NavGroup = ({ icon, label, children }) => {
         py={3}
         cursor="pointer"
         color="gray.700"
-        _hover={{ bg: 'gray.100' }}
+        _hover={{ 
+          bg: 'rgba(184, 71, 23, 0.08)',
+          color: 'brand.primary',
+        }}
         onClick={onToggle}
         borderRadius="md"
         mx={2}
         fontWeight="600"
+        transition="all 0.2s"
       >
         <Icon as={icon} mr={3} fontSize="18px" />
         <Text fontSize="sm" flex="1">
@@ -114,9 +119,10 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
         justifyContent="center"
         bg="brand.primary"
         color="white"
+        boxShadow="md"
       >
         <Text fontSize="xl" fontWeight="bold" letterSpacing="tight">
-          E2W Furniture
+          Saakaar Furniture
         </Text>
       </Flex>
 
@@ -140,6 +146,9 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
           </NavItem>
           <NavItem icon={FiFileText} to="/sales/quotations" isSubmenu onClick={isMobile ? onClose : undefined}>
             Quotations
+          </NavItem>
+          <NavItem icon={FiFile} to="/sales/proforma-invoice" isSubmenu onClick={isMobile ? onClose : undefined}>
+            Proforma Invoice
           </NavItem>
           <NavItem icon={FiFile} to="/sales/orders" isSubmenu onClick={isMobile ? onClose : undefined}>
             Sales Orders
@@ -200,7 +209,7 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
     return (
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="xs">
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg="rgba(255, 255, 255, 0.98)" backdropFilter="blur(10px)">
           <DrawerCloseButton color="white" />
           <DrawerBody p={0} overflowY="auto">
             {sidebarContent}
@@ -216,11 +225,12 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
   return (
     <Box
       w="280px"
-      bg="white"
+      bg="rgba(255, 255, 255, 0.98)"
+      backdropFilter="blur(10px)"
       borderRight="1px"
-      borderColor="gray.200"
+      borderColor="rgba(184, 71, 23, 0.1)"
       overflowY="auto"
-      boxShadow="sm"
+      boxShadow="xl"
     >
       {sidebarContent}
     </Box>

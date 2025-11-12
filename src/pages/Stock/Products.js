@@ -26,8 +26,10 @@ import {
   ModalFooter,
   SimpleGrid,
   Text,
+  Image,
+  VStack,
 } from '@chakra-ui/react';
-import { FiPlus, FiEye, FiEdit, FiPackage } from 'react-icons/fi';
+import { FiPlus, FiEye, FiEdit, FiPackage, FiImage, FiUpload } from 'react-icons/fi';
 import { products as initialProducts } from '../../data/mockData';
 
 const Products = () => {
@@ -139,6 +141,7 @@ const Products = () => {
             <Table variant="simple">
               <Thead bg="gray.50">
                 <Tr>
+                  <Th>Image</Th>
                   <Th>SKU</Th>
                   <Th>Product Name</Th>
                   <Th>Category</Th>
@@ -152,6 +155,28 @@ const Products = () => {
               <Tbody>
                 {filteredProducts.map((product) => (
                   <Tr key={product.id}>
+                    <Td>
+                      {product.image ? (
+                        <Image 
+                          src={product.image} 
+                          alt={product.name} 
+                          boxSize="60px" 
+                          objectFit="cover" 
+                          borderRadius="md"
+                        />
+                      ) : (
+                        <Box 
+                          boxSize="60px" 
+                          bg="gray.100" 
+                          display="flex" 
+                          alignItems="center" 
+                          justifyContent="center"
+                          borderRadius="md"
+                        >
+                          <FiImage size={24} color="gray" />
+                        </Box>
+                      )}
+                    </Td>
                     <Td fontWeight="600" fontSize="sm">{product.sku}</Td>
                     <Td>{product.name}</Td>
                     <Td>
@@ -213,6 +238,29 @@ const Products = () => {
           <ModalBody>
             {selectedProduct && (
               <Box>
+                {/* Product Image */}
+                {selectedProduct.image && (
+                  <Box mb={6} textAlign="center">
+                    <Image 
+                      src={selectedProduct.image} 
+                      alt={selectedProduct.name} 
+                      maxH="300px" 
+                      mx="auto"
+                      borderRadius="md"
+                      objectFit="cover"
+                    />
+                    <Button 
+                      leftIcon={<FiUpload />} 
+                      size="sm" 
+                      mt={3} 
+                      colorScheme="blue"
+                      variant="outline"
+                    >
+                      Update Image
+                    </Button>
+                  </Box>
+                )}
+                
                 <SimpleGrid columns={2} spacing={4} mb={6}>
                   <Box>
                     <Text fontSize="sm" color="gray.600">SKU</Text>

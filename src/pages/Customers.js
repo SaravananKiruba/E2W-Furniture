@@ -29,8 +29,10 @@ import {
   SimpleGrid,
   Text,
   Textarea,
+  Checkbox,
+  useToast,
 } from '@chakra-ui/react';
-import { FiPlus, FiEye, FiEdit, FiPhone, FiMail } from 'react-icons/fi';
+import { FiPlus, FiEye, FiEdit, FiPhone, FiMail, FiGift, FiSend } from 'react-icons/fi';
 import { customers as initialCustomers } from '../data/mockData';
 
 const Customers = () => {
@@ -39,6 +41,7 @@ const Customers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [typeFilter, setTypeFilter] = useState('All');
   const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [selectedCustomers, setSelectedCustomers] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -46,10 +49,12 @@ const Customers = () => {
     address: '',
     gstin: '',
     type: 'Retail',
+    birthday: '',
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isViewOpen, onOpen: onViewOpen, onClose: onViewClose } = useDisclosure();
+  const toast = useToast();
 
   React.useEffect(() => {
     let filtered = customers;
@@ -79,6 +84,7 @@ const Customers = () => {
       address: formData.address,
       gstin: formData.gstin,
       type: formData.type,
+      birthday: formData.birthday,
     };
     setCustomers([...customers, newCustomer]);
     setFormData({
@@ -88,6 +94,7 @@ const Customers = () => {
       address: '',
       gstin: '',
       type: 'Retail',
+      birthday: '',
     });
     onClose();
   };
@@ -95,6 +102,54 @@ const Customers = () => {
   const handleView = (customer) => {
     setSelectedCustomer(customer);
     onViewOpen();
+  };
+
+  const handleCheckboxChange = (customerId) => {
+    setSelectedCustomers((prev) =>
+      prev.includes(customerId)
+        ? prev.filter((id) => id !== customerId)
+        : [...prev, customerId]
+    );
+  };
+
+  const handleSendBirthdayWish = () => {
+    const selectedCustomersList = customers.filter((c) =>
+      selectedCustomers.includes(c.id)
+    );
+    
+    if (selectedCustomersList.length === 0) {
+      toast({
+        title: 'No customers selected',
+        description: 'Please select at least one customer',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    // Simulate WhatsApp message sending
+    selectedCustomersList.forEach((customer) => {
+      const message = `Dear ${customer.name}, Wishing you a very Happy Birthday! 🎉 May this special day bring you joy and happiness. - Saakaar Furniture Team`;
+      const whatsappUrl = `https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    });
+
+    toast({
+      title: 'Birthday wishes sent!',
+      description: `Sent WhatsApp wishes to ${selectedCustomersList.length} customer(s)`,
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
+    
+    setSelectedCustomers([]);
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
   };
 
   return (
@@ -139,14 +194,39 @@ const Customers = () => {
             </Button>
           </HStack>
 
+          {selectedCustomers.length > 0 && (
+            <HStack spacing={2} mb={4} p={3} bg="blue.50" borderRadius="md">
+              <Text fontSize="sm" fontWeight="600">
+                {selectedCustomers.length} customer(s) selected
+              </Text>
+              <Button
+                leftIcon={<FiSend />}
+                size="sm"
+                colorScheme="green"
+                onClick={handleSendBirthdayWish}
+              >
+                Send Birthday Wish via WhatsApp
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => setSelectedCustomers([])}
+              >
+                Clear Selection
+              </Button>
+            </HStack>
+          )}
+
           <Box overflowX="auto">
             <Table variant="simple">
               <Thead bg="gray.50">
                 <Tr>
+                  <Th>Select</Th>
                   <Th>ID</Th>
                   <Th>Name</Th>
                   <Th>Phone</Th>
                   <Th>Email</Th>
+                  <Th>Birthday</Th>
                   <Th>GSTIN</Th>
                   <Th>Type</Th>
                   <Th>Actions</Th>
@@ -155,6 +235,13 @@ const Customers = () => {
               <Tbody>
                 {filteredCustomers.map((customer) => (
                   <Tr key={customer.id}>
+                    <Td>
+                      <Checkbox
+                        isChecked={selectedCustomers.includes(customer.id)}
+                        onChange={() => handleCheckboxChange(customer.id)}
+                        colorScheme="brand"
+                      />
+                    </Td>
                     <Td fontWeight="600">#{customer.id}</Td>
                     <Td fontWeight="600">{customer.name}</Td>
                     <Td>
@@ -167,6 +254,12 @@ const Customers = () => {
                       <HStack>
                         <FiMail size="14" />
                         <Text fontSize="sm">{customer.email}</Text>
+                      </HStack>
+                    </Td>
+                    <Td>
+                      <HStack>
+                        <FiGift size="14" color="#FF6B6B" />
+                        <Text fontSize="sm">{formatDate(customer.birthday)}</Text>
                       </HStack>
                     </Td>
                     <Td fontSize="sm">{customer.gstin || '-'}</Td>
@@ -249,6 +342,16 @@ const Customers = () => {
                 />
               </FormControl>
               <FormControl>
+                <FormLabel>Birthday</FormLabel>
+                <Input
+                  type="date"
+                  value={formData.birthday}
+                  onChange={(e) =>
+                    setFormData({ ...formData, birthday: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl>
                 <FormLabel>GSTIN (Optional)</FormLabel>
                 <Input
                   value={formData.gstin}
@@ -324,7 +427,14 @@ const Customers = () => {
                   <Text fontSize="sm" color="gray.600">Address</Text>
                   <Text>{selectedCustomer.address}</Text>
                 </Box>
-                <Box gridColumn="span 2">
+                <Box>
+                  <Text fontSize="sm" color="gray.600">Birthday</Text>
+                  <HStack>
+                    <FiGift color="#FF6B6B" />
+                    <Text fontWeight="600">{formatDate(selectedCustomer.birthday)}</Text>
+                  </HStack>
+                </Box>
+                <Box>
                   <Text fontSize="sm" color="gray.600">GSTIN</Text>
                   <Text fontWeight="600">{selectedCustomer.gstin || 'Not provided'}</Text>
                 </Box>
@@ -334,6 +444,18 @@ const Customers = () => {
           <ModalFooter>
             <Button variant="ghost" mr={3} onClick={onViewClose}>
               Close
+            </Button>
+            <Button 
+              leftIcon={<FiSend />} 
+              colorScheme="green" 
+              mr={3}
+              onClick={() => {
+                const message = `Dear ${selectedCustomer.name}, Wishing you a very Happy Birthday! 🎉 - Saakaar Furniture Team`;
+                const whatsappUrl = `https://wa.me/${selectedCustomer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+              }}
+            >
+              Send Birthday Wish
             </Button>
             <Button colorScheme="brand">Edit Details</Button>
           </ModalFooter>

@@ -22,10 +22,11 @@ const Header = ({ onToggle }) => {
       justify="space-between"
       px={{ base: 3, md: 6 }}
       py={3}
-      bg="white"
+      bg="rgba(255, 255, 255, 0.95)"
+      backdropFilter="blur(10px)"
       borderBottom="1px"
-      borderColor="gray.200"
-      boxShadow="sm"
+      borderColor="rgba(184, 71, 23, 0.1)"
+      boxShadow="lg"
       h="16"
     >
       <HStack spacing={{ base: 2, md: 4 }}>
@@ -34,22 +35,26 @@ const Header = ({ onToggle }) => {
           variant="ghost"
           onClick={onToggle}
           aria-label="Toggle Navigation"
+          color="brand.primary"
+          _hover={{ bg: 'rgba(184, 71, 23, 0.1)' }}
         />
         <Text 
           fontSize={{ base: 'sm', md: 'lg' }} 
-          fontWeight="600" 
+          fontWeight="700" 
           color="brand.primary"
           display={{ base: 'none', sm: 'block' }}
+          letterSpacing="tight"
         >
-          Showroom Management System
+          Saakaar Furniture
         </Text>
         <Text 
           fontSize="sm" 
-          fontWeight="600" 
+          fontWeight="700" 
           color="brand.primary"
           display={{ base: 'block', sm: 'none' }}
+          letterSpacing="tight"
         >
-          E2W
+          Saakaar
         </Text>
       </HStack>
 

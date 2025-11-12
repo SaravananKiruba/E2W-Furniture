@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Inquiries from './pages/Sales/Inquiries';
 import Quotations from './pages/Sales/Quotations';
+import ProformaInvoice from './pages/Sales/ProformaInvoice';
 import SalesOrders from './pages/Sales/SalesOrders';
 import Invoices from './pages/Sales/Invoices';
 import Payments from './pages/Accounts/Payments';
@@ -31,6 +32,7 @@ function App() {
             {/* Sales Module */}
             <Route path="/sales/inquiries" element={<Inquiries />} />
             <Route path="/sales/quotations" element={<Quotations />} />
+            <Route path="/sales/proforma-invoice" element={<ProformaInvoice />} />
             <Route path="/sales/orders" element={<SalesOrders />} />
             <Route path="/sales/invoices" element={<Invoices />} />
             
