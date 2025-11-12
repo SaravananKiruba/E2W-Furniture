@@ -30,8 +30,9 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { FiPlus, FiEye, FiDownload } from 'react-icons/fi';
-import { payments as initialPayments } from '../../data/mockData';
+import { FiPlus, FiEye, FiDownload, FiMail } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
+import { payments as initialPayments, customers } from '../../data/mockData';
 
 const Payments = () => {
   const [payments, setPayments] = useState(initialPayments);
@@ -86,7 +87,7 @@ const Payments = () => {
       customerName: formData.customerName,
       amount: parseFloat(formData.amount),
       mode: formData.mode,
-      date: new Date().toISOString().split('T')[0],
+      paymentDate: new Date().toISOString().split('T')[0],
       transactionRef: formData.transactionRef,
       remarks: formData.remarks,
     };
@@ -160,7 +161,7 @@ const Payments = () => {
               <Thead bg="gray.50">
                 <Tr>
                   <Th>Payment No</Th>
-                  <Th>Date</Th>
+                  <Th>Payment Date</Th>
                   <Th>Customer</Th>
                   <Th>Invoice No</Th>
                   <Th isNumeric>Amount</Th>
@@ -173,7 +174,7 @@ const Payments = () => {
                 {filteredPayments.map((payment) => (
                   <Tr key={payment.id}>
                     <Td fontWeight="600">{payment.paymentNo}</Td>
-                    <Td>{payment.date}</Td>
+                    <Td>{payment.paymentDate}</Td>
                     <Td>{payment.customerName}</Td>
                     <Td>{payment.invoiceNo}</Td>
                     <Td isNumeric fontWeight="600" color="green.600">
@@ -186,7 +187,7 @@ const Payments = () => {
                     </Td>
                     <Td fontSize="sm">{payment.transactionRef}</Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <IconButton
                           icon={<FiEye />}
                           size="sm"
@@ -195,10 +196,37 @@ const Payments = () => {
                           aria-label="View"
                         />
                         <IconButton
-                          icon={<FiDownload />}
+                          icon={<FaWhatsapp />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="green"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === payment.customerId);
+                            if (customer) {
+                              const message = `Hello ${customer.name}, we have received your payment of ₹${payment.amount.toLocaleString('en-IN')} (${payment.paymentNo}). Thank you for your payment!`;
+                              window.open(`https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`);
+                            }
+                          }}
+                          aria-label="Send WhatsApp"
+                        />
+                        <IconButton
+                          icon={<FiMail />}
                           size="sm"
                           variant="ghost"
                           colorScheme="blue"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === payment.customerId);
+                            if (customer) {
+                              window.open(`mailto:${customer.email}?subject=Payment Confirmation - ${payment.paymentNo}&body=Dear ${customer.name},%0D%0A%0D%0AWe have received your payment of ₹${payment.amount.toLocaleString('en-IN')}.%0D%0APayment No: ${payment.paymentNo}%0D%0AInvoice No: ${payment.invoiceNo}%0D%0A%0D%0AThank you!`);
+                            }
+                          }}
+                          aria-label="Send Email"
+                        />
+                        <IconButton
+                          icon={<FiDownload />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="orange"
                           aria-label="Download Receipt"
                         />
                       </HStack>
@@ -317,8 +345,8 @@ const Payments = () => {
                     <Text fontWeight="600">{selectedPayment.paymentNo}</Text>
                   </Box>
                   <Box textAlign="right">
-                    <Text fontSize="sm" color="gray.600">Date</Text>
-                    <Text fontWeight="600">{selectedPayment.date}</Text>
+                    <Text fontSize="sm" color="gray.600">Payment Date</Text>
+                    <Text fontWeight="600">{selectedPayment.paymentDate}</Text>
                   </Box>
                   <Box>
                     <Text fontSize="sm" color="gray.600">Customer Name</Text>

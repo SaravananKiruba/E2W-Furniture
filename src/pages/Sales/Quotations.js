@@ -31,8 +31,9 @@ import {
   useToast,
   Tooltip,
 } from '@chakra-ui/react';
-import { FiPlus, FiEye, FiDownload, FiCopy, FiClock } from 'react-icons/fi';
-import { quotations as initialQuotations } from '../../data/mockData';
+import { FiPlus, FiEye, FiDownload, FiCopy, FiClock, FiMail } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
+import { quotations as initialQuotations, customers } from '../../data/mockData';
 
 const Quotations = () => {
   const [quotations, setQuotations] = useState(initialQuotations);
@@ -86,13 +87,13 @@ const Quotations = () => {
       ...quotation,
       revision: quotation.revision + 1,
       quotationNo: `${quotation.quotationNo.split('-Rev')[0]}-Rev${quotation.revision + 1}`,
-      date: new Date().toISOString().split('T')[0],
+      quotationDate: new Date().toISOString().split('T')[0],
       status: 'Draft',
       revisionHistory: [
         ...quotation.revisionHistory,
         {
           revisionNo: quotation.revision,
-          date: quotation.date,
+          quotationDate: quotation.quotationDate,
           total: quotation.total,
           remarks: `Revision ${quotation.revision}`,
         },
@@ -167,7 +168,7 @@ const Quotations = () => {
                 <Tr>
                   <Th>Quotation No</Th>
                   <Th>Revision</Th>
-                  <Th>Date</Th>
+                  <Th>Quotation Date</Th>
                   <Th>Customer</Th>
                   <Th>Valid Until</Th>
                   <Th isNumeric>Amount</Th>
@@ -197,7 +198,7 @@ const Quotations = () => {
                         )}
                       </HStack>
                     </Td>
-                    <Td>{quotation.date}</Td>
+                    <Td>{quotation.quotationDate}</Td>
                     <Td>{quotation.customerName}</Td>
                     <Td>{quotation.validUntil}</Td>
                     <Td isNumeric fontWeight="600">{formatCurrency(quotation.total)}</Td>
@@ -207,13 +208,40 @@ const Quotations = () => {
                       </Badge>
                     </Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <IconButton
                           icon={<FiEye />}
                           size="sm"
                           variant="ghost"
                           onClick={() => handleView(quotation)}
                           aria-label="View"
+                        />
+                        <IconButton
+                          icon={<FaWhatsapp />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="green"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === quotation.customerId);
+                            if (customer) {
+                              const message = `Hello ${customer.name}, your quotation ${quotation.quotationNo} for ₹${quotation.total.toLocaleString('en-IN')} is ready. Valid until ${quotation.validUntil}. Please review and let us know!`;
+                              window.open(`https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`);
+                            }
+                          }}
+                          aria-label="Send WhatsApp"
+                        />
+                        <IconButton
+                          icon={<FiMail />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="blue"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === quotation.customerId);
+                            if (customer) {
+                              window.open(`mailto:${customer.email}?subject=Quotation - ${quotation.quotationNo}&body=Dear ${customer.name},%0D%0A%0D%0APlease find your quotation ${quotation.quotationNo} for ₹${quotation.total.toLocaleString('en-IN')}.%0D%0AValid Until: ${quotation.validUntil}%0D%0A%0D%0APlease review and let us know!`);
+                            }
+                          }}
+                          aria-label="Send Email"
                         />
                         <Tooltip label="Create Revision">
                           <IconButton
@@ -229,7 +257,7 @@ const Quotations = () => {
                           icon={<FiDownload />}
                           size="sm"
                           variant="ghost"
-                          colorScheme="blue"
+                          colorScheme="purple"
                           aria-label="Download"
                         />
                       </HStack>
@@ -257,8 +285,8 @@ const Quotations = () => {
                     <Text fontWeight="600">{selectedQuotation.quotationNo}</Text>
                   </Box>
                   <Box>
-                    <Text fontSize="sm" color="gray.600">Date</Text>
-                    <Text fontWeight="600">{selectedQuotation.date}</Text>
+                    <Text fontSize="sm" color="gray.600">Quotation Date</Text>
+                    <Text fontWeight="600">{selectedQuotation.quotationDate}</Text>
                   </Box>
                   <Box>
                     <Text fontSize="sm" color="gray.600">Customer</Text>
@@ -341,7 +369,7 @@ const Quotations = () => {
                     <Badge colorScheme="blue" fontSize="md">Active</Badge>
                   </HStack>
                   <SimpleGrid columns={2} spacing={2}>
-                    <Text fontSize="sm">Date: {selectedQuotation.date}</Text>
+                    <Text fontSize="sm">Quotation Date: {selectedQuotation.quotationDate}</Text>
                     <Text fontSize="sm" textAlign="right">
                       Total: {formatCurrency(selectedQuotation.total)}
                     </Text>
@@ -365,7 +393,7 @@ const Quotations = () => {
                           <Badge colorScheme="gray">Historical</Badge>
                         </HStack>
                         <SimpleGrid columns={2} spacing={2}>
-                          <Text fontSize="sm">Date: {rev.date}</Text>
+                          <Text fontSize="sm">Quotation Date: {rev.quotationDate}</Text>
                           <Text fontSize="sm" textAlign="right">
                             Total: {formatCurrency(rev.total)}
                           </Text>

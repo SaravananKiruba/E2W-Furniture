@@ -74,7 +74,7 @@ const Inquiries = () => {
       id: inquiries.length + 1,
       customerId: customers.length + 1,
       customerName: formData.customerName,
-      date: new Date().toISOString().split('T')[0],
+      inquiryDate: new Date().toISOString().split('T')[0],
       items: formData.items,
       status: 'New',
       remarks: formData.remarks,
@@ -150,9 +150,9 @@ const Inquiries = () => {
               <Thead bg="gray.50">
                 <Tr>
                   <Th>ID</Th>
-                  <Th>Date</Th>
+                  <Th>Inquiry Date</Th>
                   <Th>Customer Name</Th>
-                  <Th>Contact</Th>
+                  <Th>Phone Number</Th>
                   <Th>Items of Interest</Th>
                   <Th>Status</Th>
                   <Th>Assigned To</Th>
@@ -163,7 +163,7 @@ const Inquiries = () => {
                 {filteredInquiries.map((inquiry) => (
                   <Tr key={inquiry.id}>
                     <Td fontWeight="600">#{inquiry.id}</Td>
-                    <Td>{inquiry.date}</Td>
+                    <Td>{inquiry.inquiryDate}</Td>
                     <Td>{inquiry.customerName}</Td>
                     <Td>
                       <Text fontSize="sm" fontWeight="500">{inquiry.phone || '-'}</Text>
@@ -176,7 +176,7 @@ const Inquiries = () => {
                     </Td>
                     <Td>{inquiry.assignedTo}</Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <IconButton
                           icon={<FiEye />}
                           size="sm"
@@ -188,7 +188,7 @@ const Inquiries = () => {
                           icon={<FiEdit />}
                           size="sm"
                           variant="ghost"
-                          colorScheme="blue"
+                          colorScheme="orange"
                           aria-label="Edit"
                         />
                       </HStack>
@@ -291,9 +291,9 @@ const Inquiries = () => {
                   </Box>
                   <Box>
                     <Text fontSize="sm" color="gray.600">
-                      Date
+                      Inquiry Date
                     </Text>
-                    <Text fontWeight="600">{selectedInquiry.date}</Text>
+                    <Text fontWeight="600">{selectedInquiry.inquiryDate}</Text>
                   </Box>
                   <Box>
                     <Text fontSize="sm" color="gray.600">

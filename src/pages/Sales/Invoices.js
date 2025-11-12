@@ -29,8 +29,9 @@ import {
   VStack,
   Divider,
 } from '@chakra-ui/react';
-import { FiDownload, FiEye, FiSend } from 'react-icons/fi';
-import { invoices as initialInvoices } from '../../data/mockData';
+import { FiDownload, FiEye, FiSend, FiMail } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
+import { invoices as initialInvoices, customers } from '../../data/mockData';
 
 const Invoices = () => {
   const [invoices] = useState(initialInvoices);
@@ -139,7 +140,7 @@ const Invoices = () => {
                       </Badge>
                     </Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <IconButton
                           icon={<FiEye />}
                           size="sm"
@@ -148,18 +149,38 @@ const Invoices = () => {
                           aria-label="View"
                         />
                         <IconButton
-                          icon={<FiDownload />}
-                          size="sm"
-                          variant="ghost"
-                          colorScheme="blue"
-                          aria-label="Download"
-                        />
-                        <IconButton
-                          icon={<FiSend />}
+                          icon={<FaWhatsapp />}
                           size="sm"
                           variant="ghost"
                           colorScheme="green"
-                          aria-label="Send"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === invoice.customerId);
+                            if (customer) {
+                              const message = `Hello ${customer.name}, your invoice ${invoice.invoiceNo} for ₹${invoice.total.toLocaleString('en-IN')} is ready. Due date: ${invoice.dueDate}. Thank you!`;
+                              window.open(`https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`);
+                            }
+                          }}
+                          aria-label="Send WhatsApp"
+                        />
+                        <IconButton
+                          icon={<FiMail />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="blue"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === invoice.customerId);
+                            if (customer) {
+                              window.open(`mailto:${customer.email}?subject=Invoice - ${invoice.invoiceNo}&body=Dear ${customer.name},%0D%0A%0D%0APlease find your invoice ${invoice.invoiceNo} for ₹${invoice.total.toLocaleString('en-IN')}.%0D%0ADue Date: ${invoice.dueDate}%0D%0A%0D%0AThank you!`);
+                            }
+                          }}
+                          aria-label="Send Email"
+                        />
+                        <IconButton
+                          icon={<FiDownload />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="orange"
+                          aria-label="Download"
                         />
                       </HStack>
                     </Td>

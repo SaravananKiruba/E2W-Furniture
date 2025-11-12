@@ -47,13 +47,8 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'transparent',
-        color: 'gray.100',
-        backgroundImage: 'url(/src/assets/Backround.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
+        bg: '#FFFFFF',
+        color: 'gray.800',
       },
       '*': {
         boxSizing: 'border-box',
@@ -109,9 +104,8 @@ const theme = extendTheme({
       baseStyle: {
         container: {
           bg: GLASS_EFFECT.cardBg,
-          backdropFilter: 'blur(10px)',
           borderRadius: 'lg',
-          boxShadow: 'xl',
+          boxShadow: 'md',
           border: '1px solid',
           borderColor: BRAND_COLORS.primaryBorder,
         },
@@ -121,7 +115,6 @@ const theme = extendTheme({
       baseStyle: {
         dialog: {
           bg: GLASS_EFFECT.modalBg,
-          backdropFilter: 'blur(10px)',
         },
       },
     },

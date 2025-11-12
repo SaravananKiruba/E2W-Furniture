@@ -29,8 +29,9 @@ import {
   VStack,
   Divider,
 } from '@chakra-ui/react';
-import { FiPlus, FiEye, FiCheck } from 'react-icons/fi';
-import { salesOrders as initialOrders } from '../../data/mockData';
+import { FiPlus, FiEye, FiCheck, FiMail } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
+import { salesOrders as initialOrders, customers } from '../../data/mockData';
 
 const SalesOrders = () => {
   const [orders] = useState(initialOrders);
@@ -157,7 +158,7 @@ const SalesOrders = () => {
                       </Badge>
                     </Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <IconButton
                           icon={<FiEye />}
                           size="sm"
@@ -165,12 +166,39 @@ const SalesOrders = () => {
                           onClick={() => handleView(order)}
                           aria-label="View"
                         />
+                        <IconButton
+                          icon={<FaWhatsapp />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="green"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === order.customerId);
+                            if (customer) {
+                              const message = `Hello ${customer.name}, your order ${order.orderNo} for ₹${order.total.toLocaleString('en-IN')} is confirmed! Delivery scheduled for ${order.deliveryDate}. Thank you for your order!`;
+                              window.open(`https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`);
+                            }
+                          }}
+                          aria-label="Send WhatsApp"
+                        />
+                        <IconButton
+                          icon={<FiMail />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="blue"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === order.customerId);
+                            if (customer) {
+                              window.open(`mailto:${customer.email}?subject=Order Confirmation - ${order.orderNo}&body=Dear ${customer.name},%0D%0A%0D%0AYour order ${order.orderNo} for ₹${order.total.toLocaleString('en-IN')} is confirmed!%0D%0ADelivery Date: ${order.deliveryDate}%0D%0A%0D%0AThank you for your order!`);
+                            }
+                          }}
+                          aria-label="Send Email"
+                        />
                         {order.status === 'Pending Approval' && (
                           <IconButton
                             icon={<FiCheck />}
                             size="sm"
                             variant="ghost"
-                            colorScheme="green"
+                            colorScheme="orange"
                             aria-label="Approve"
                           />
                         )}

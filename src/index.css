@@ -10,11 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background-image: url('./assets/Backround.png');
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: #FFFFFF;
 }
 
 code {
@@ -22,18 +18,16 @@ code {
     monospace;
 }
 
-/* Card styling with glass effect */
+/* Card styling */
 .chakra-card {
   background: var(--glass-card-bg) !important;
-  backdrop-filter: blur(10px);
   border: 1px solid var(--brand-primary-border);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Modal styling */
 .chakra-modal__content {
   background: var(--glass-modal-bg) !important;
-  backdrop-filter: blur(10px);
   border: 1px solid var(--brand-primary-border);
 }
 
@@ -61,7 +55,6 @@ code {
 /* Alert styling */
 .chakra-alert {
   background: var(--glass-card-bg) !important;
-  backdrop-filter: blur(10px);
   border: 1px solid var(--brand-primary-border);
 }
 

@@ -15,6 +15,8 @@ import Reports from './pages/Accounts/Reports';
 import Products from './pages/Stock/Products';
 import RawMaterials from './pages/Stock/RawMaterials';
 import DeliveryNotes from './pages/Delivery/DeliveryNotes';
+import CustomerDelivery from './pages/Delivery/CustomerDelivery';
+import ShowroomDelivery from './pages/Delivery/ShowroomDelivery';
 import Customers from './pages/Customers';
 import Vendors from './pages/Vendors';
 import PurchaseOrders from './pages/Purchases/PurchaseOrders';
@@ -52,6 +54,8 @@ function App() {
             
             {/* Delivery Module */}
             <Route path="/delivery/notes" element={<DeliveryNotes />} />
+            <Route path="/delivery/customer" element={<CustomerDelivery />} />
+            <Route path="/delivery/showroom" element={<ShowroomDelivery />} />
           </Routes>
         </Layout>
       </Router>

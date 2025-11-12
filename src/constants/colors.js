@@ -17,9 +17,9 @@ export const BRAND_COLORS = {
 };
 
 export const GLASS_EFFECT = {
-  cardBg: 'rgba(255, 255, 255, 0.95)',
-  modalBg: 'rgba(255, 255, 255, 0.98)',
-  scrollbarTrack: 'rgba(255, 255, 255, 0.3)',
+  cardBg: '#FFFFFF',
+  modalBg: '#FFFFFF',
+  scrollbarTrack: '#F7FAFC',
 };
 
 // CSS Custom Properties mapping

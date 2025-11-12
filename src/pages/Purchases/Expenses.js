@@ -251,8 +251,8 @@ const Expenses = () => {
             <Table variant="simple">
               <Thead bg="gray.50">
                 <Tr>
-                  <Th>Expense No.</Th>
-                  <Th>Date</Th>
+                  <Th>Expense No</Th>
+                  <Th>Expense Date</Th>
                   <Th>Category</Th>
                   <Th>Description</Th>
                   <Th isNumeric>Amount</Th>
@@ -265,7 +265,7 @@ const Expenses = () => {
                 {filteredExpenses.map((expense) => (
                   <Tr key={expense.id}>
                     <Td fontWeight="600">{expense.expenseNo}</Td>
-                    <Td>{expense.date}</Td>
+                    <Td>{expense.expenseDate}</Td>
                     <Td>
                       <Badge colorScheme="purple">{expense.category}</Badge>
                     </Td>
@@ -324,9 +324,9 @@ const Expenses = () => {
                   </Box>
                   <Box>
                     <Text fontSize="sm" color="gray.600">
-                      Date
+                      Expense Date
                     </Text>
-                    <Text fontWeight="bold">{selectedExpense.date}</Text>
+                    <Text fontWeight="bold">{selectedExpense.expenseDate}</Text>
                   </Box>
                   <Box>
                     <Text fontSize="sm" color="gray.600">

@@ -29,8 +29,9 @@ import {
   VStack,
   Divider,
 } from '@chakra-ui/react';
-import { FiPlus, FiEye, FiEdit, FiPackage, FiCheck, FiX } from 'react-icons/fi';
-import { purchaseOrders as initialPurchaseOrders } from '../../data/mockData';
+import { FiPlus, FiEye, FiEdit, FiPackage, FiCheck, FiX, FiMail } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
+import { purchaseOrders as initialPurchaseOrders, vendors } from '../../data/mockData';
 
 const PurchaseOrders = () => {
   const [purchaseOrders] = useState(initialPurchaseOrders);
@@ -229,19 +230,45 @@ const PurchaseOrders = () => {
                       <Badge colorScheme={getStatusColor(po.status)}>{po.status}</Badge>
                     </Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <IconButton
                           icon={<FiEye />}
                           size="sm"
                           variant="ghost"
-                          colorScheme="blue"
                           onClick={() => handleView(po)}
+                        />
+                        <IconButton
+                          icon={<FaWhatsapp />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="green"
+                          onClick={() => {
+                            const vendor = vendors.find(v => v.id === po.vendorId);
+                            if (vendor) {
+                              const message = `Hello, purchase order ${po.poNo} for ₹${po.total.toLocaleString('en-IN')} has been placed. Expected delivery: ${po.expectedDelivery}. Payment terms: ${po.paymentTerms}. Thank you!`;
+                              window.open(`https://wa.me/${vendor.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`);
+                            }
+                          }}
+                          aria-label="Send WhatsApp"
+                        />
+                        <IconButton
+                          icon={<FiMail />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="blue"
+                          onClick={() => {
+                            const vendor = vendors.find(v => v.id === po.vendorId);
+                            if (vendor) {
+                              window.open(`mailto:${vendor.email}?subject=Purchase Order - ${po.poNo}&body=Dear Vendor,%0D%0A%0D%0APurchase order ${po.poNo} for ₹${po.total.toLocaleString('en-IN')} has been placed.%0D%0AExpected Delivery: ${po.expectedDelivery}%0D%0APayment Terms: ${po.paymentTerms}%0D%0A%0D%0AThank you!`);
+                            }
+                          }}
+                          aria-label="Send Email"
                         />
                         <IconButton
                           icon={<FiEdit />}
                           size="sm"
                           variant="ghost"
-                          colorScheme="green"
+                          colorScheme="orange"
                         />
                         {po.status === 'Confirmed' && (
                           <IconButton

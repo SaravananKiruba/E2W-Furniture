@@ -30,7 +30,9 @@ import {
   Divider,
   useToast,
 } from '@chakra-ui/react';
-import { FiPlus, FiEye, FiDownload, FiSend } from 'react-icons/fi';
+import { FiPlus, FiEye, FiDownload, FiSend, FiMail } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
+import { customers } from '../../data/mockData';
 
 const ProformaInvoice = () => {
   const [proformaInvoices, setProformaInvoices] = useState([
@@ -204,7 +206,7 @@ const ProformaInvoice = () => {
                       </Badge>
                     </Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <IconButton
                           icon={<FiEye />}
                           size="sm"
@@ -213,18 +215,37 @@ const ProformaInvoice = () => {
                           aria-label="View"
                         />
                         <IconButton
-                          icon={<FiSend />}
+                          icon={<FaWhatsapp />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="green"
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === invoice.customerId);
+                            if (customer) {
+                              const message = `Hello ${customer.name}, your proforma invoice ${invoice.piNo} for ₹${invoice.total.toLocaleString('en-IN')} is ready. Valid until ${invoice.validUntil}. Please review!`;
+                              window.open(`https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`);
+                            }
+                          }}
+                          aria-label="Send WhatsApp"
+                        />
+                        <IconButton
+                          icon={<FiMail />}
                           size="sm"
                           variant="ghost"
                           colorScheme="blue"
-                          onClick={() => handleSendEmail(invoice)}
+                          onClick={() => {
+                            const customer = customers.find(c => c.id === invoice.customerId);
+                            if (customer) {
+                              window.open(`mailto:${customer.email}?subject=Proforma Invoice - ${invoice.piNo}&body=Dear ${customer.name},%0D%0A%0D%0APlease find your proforma invoice ${invoice.piNo} for ₹${invoice.total.toLocaleString('en-IN')}.%0D%0AValid Until: ${invoice.validUntil}%0D%0A%0D%0APlease review and confirm!`);
+                            }
+                          }}
                           aria-label="Send Email"
                         />
                         <IconButton
                           icon={<FiDownload />}
                           size="sm"
                           variant="ghost"
-                          colorScheme="green"
+                          colorScheme="orange"
                           aria-label="Download"
                         />
                       </HStack>

@@ -33,6 +33,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { FiPlus, FiEye, FiEdit, FiPhone, FiMail, FiGift, FiSend } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import { customers as initialCustomers } from '../data/mockData';
 
 const Customers = () => {
@@ -224,7 +225,7 @@ const Customers = () => {
                   <Th>Select</Th>
                   <Th>ID</Th>
                   <Th>Name</Th>
-                  <Th>Phone</Th>
+                  <Th>Phone Number</Th>
                   <Th>Email</Th>
                   <Th>Birthday</Th>
                   <Th>GSTIN</Th>
@@ -245,16 +246,10 @@ const Customers = () => {
                     <Td fontWeight="600">#{customer.id}</Td>
                     <Td fontWeight="600">{customer.name}</Td>
                     <Td>
-                      <HStack>
-                        <FiPhone size="14" />
-                        <Text>{customer.phone}</Text>
-                      </HStack>
+                      <Text>{customer.phone}</Text>
                     </Td>
                     <Td>
-                      <HStack>
-                        <FiMail size="14" />
-                        <Text fontSize="sm">{customer.email}</Text>
-                      </HStack>
+                      <Text fontSize="sm">{customer.email}</Text>
                     </Td>
                     <Td>
                       <HStack>
@@ -269,7 +264,7 @@ const Customers = () => {
                       </Badge>
                     </Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <IconButton
                           icon={<FiEye />}
                           size="sm"
@@ -278,10 +273,26 @@ const Customers = () => {
                           aria-label="View"
                         />
                         <IconButton
-                          icon={<FiEdit />}
+                          icon={<FaWhatsapp />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="green"
+                          onClick={() => window.open(`https://wa.me/${customer.phone.replace(/\s/g, '')}`, '_blank')}
+                          aria-label="WhatsApp"
+                        />
+                        <IconButton
+                          icon={<FiMail />}
                           size="sm"
                           variant="ghost"
                           colorScheme="blue"
+                          onClick={() => window.open(`mailto:${customer.email}`, '_blank')}
+                          aria-label="Email"
+                        />
+                        <IconButton
+                          icon={<FiEdit />}
+                          size="sm"
+                          variant="ghost"
+                          colorScheme="orange"
                           aria-label="Edit"
                         />
                       </HStack>
@@ -410,17 +421,31 @@ const Customers = () => {
                   <Text fontWeight="600" fontSize="lg">{selectedCustomer.name}</Text>
                 </Box>
                 <Box>
-                  <Text fontSize="sm" color="gray.600">Phone</Text>
-                  <HStack>
-                    <FiPhone />
+                  <Text fontSize="sm" color="gray.600">Phone Number</Text>
+                  <HStack spacing={2}>
                     <Text fontWeight="600">{selectedCustomer.phone}</Text>
+                    <IconButton
+                      icon={<FaWhatsapp />}
+                      size="xs"
+                      colorScheme="green"
+                      variant="ghost"
+                      aria-label="WhatsApp"
+                      onClick={() => window.open(`https://wa.me/${selectedCustomer.phone.replace(/\s/g, '')}`, '_blank')}
+                    />
                   </HStack>
                 </Box>
                 <Box>
                   <Text fontSize="sm" color="gray.600">Email</Text>
-                  <HStack>
-                    <FiMail />
+                  <HStack spacing={2}>
                     <Text fontWeight="600" fontSize="sm">{selectedCustomer.email}</Text>
+                    <IconButton
+                      icon={<FiMail />}
+                      size="xs"
+                      colorScheme="blue"
+                      variant="ghost"
+                      aria-label="Send Email"
+                      onClick={() => window.open(`mailto:${selectedCustomer.email}`, '_blank')}
+                    />
                   </HStack>
                 </Box>
                 <Box gridColumn="span 2">

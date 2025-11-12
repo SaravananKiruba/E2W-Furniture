@@ -19,7 +19,8 @@ import {
   Tooltip,
   Button,
 } from '@chakra-ui/react';
-import { FiEye, FiDownload, FiSend, FiFileText } from 'react-icons/fi';
+import { FiEye, FiDownload, FiSend, FiFileText, FiMail } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import { customerLedger as initialLedger, customers } from '../../data/mockData';
 
 const CustomerLedger = () => {
@@ -167,7 +168,7 @@ const CustomerLedger = () => {
                       </Badge>
                     </Td>
                     <Td>
-                      <HStack spacing={2}>
+                      <HStack spacing={1}>
                         <Tooltip label="View Details">
                           <IconButton
                             icon={<FiEye />}
@@ -176,28 +177,47 @@ const CustomerLedger = () => {
                             aria-label="View Details"
                           />
                         </Tooltip>
+                        <Tooltip label="Send via WhatsApp">
+                          <IconButton
+                            icon={<FaWhatsapp />}
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="green"
+                            onClick={() => {
+                              const customer = customers.find(c => c.id === entry.customerId);
+                              if (customer) {
+                                const message = `Hello ${customer.name}, this is a payment reminder. Your outstanding balance is ₹${entry.balance.toLocaleString('en-IN')}. Please clear the dues at the earliest. Thank you!`;
+                                window.open(`https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`);
+                              }
+                            }}
+                            aria-label="Send WhatsApp"
+                          />
+                        </Tooltip>
+                        <Tooltip label="Send Email">
+                          <IconButton
+                            icon={<FiMail />}
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="blue"
+                            onClick={() => {
+                              const customer = customers.find(c => c.id === entry.customerId);
+                              if (customer) {
+                                window.open(`mailto:${customer.email}?subject=Payment Reminder&body=Dear ${customer.name},%0D%0A%0D%0AThis is a reminder about your outstanding balance of ₹${entry.balance.toLocaleString('en-IN')}. Please clear the dues at the earliest.%0D%0A%0D%0AThank you!`);
+                              }
+                            }}
+                            aria-label="Send Email"
+                          />
+                        </Tooltip>
                         <Tooltip label="Download PDF Statement">
                           <IconButton
                             icon={<FiDownload />}
                             size="sm"
                             variant="ghost"
-                            colorScheme="blue"
+                            colorScheme="orange"
                             onClick={() => handleDownloadPDF(entry)}
                             aria-label="Download Statement"
                           />
                         </Tooltip>
-                        {entry.balance > 0 && (
-                          <Tooltip label="Send Payment Followup via WhatsApp">
-                            <IconButton
-                              icon={<FiSend />}
-                              size="sm"
-                              variant="ghost"
-                              colorScheme="green"
-                              onClick={() => handleSendPaymentFollowup(entry)}
-                              aria-label="Send Followup"
-                            />
-                          </Tooltip>
-                        )}
                       </HStack>
                     </Td>
                   </Tr>

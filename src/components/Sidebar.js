@@ -196,8 +196,11 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
 
         {/* Delivery Module */}
         <NavGroup icon={FiTruck} label="Delivery">
-          <NavItem icon={FiFileText} to="/delivery/notes" isSubmenu onClick={isMobile ? onClose : undefined}>
-            Delivery Notes
+          <NavItem icon={FiTruck} to="/delivery/customer" isSubmenu onClick={isMobile ? onClose : undefined}>
+            Customer Delivery
+          </NavItem>
+          <NavItem icon={FiPackage} to="/delivery/showroom" isSubmenu onClick={isMobile ? onClose : undefined}>
+            Showroom Delivery
           </NavItem>
         </NavGroup>
       </VStack>

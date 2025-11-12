@@ -37,6 +37,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import { FiPlus, FiEye, FiEdit, FiPhone, FiMail, FiMapPin, FiAlertCircle, FiClock } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import { vendors as initialVendors } from '../data/mockData';
 
 const Vendors = () => {
@@ -268,7 +269,7 @@ const Vendors = () => {
                 <Tr>
                   <Th>Vendor Name</Th>
                   <Th>Category</Th>
-                  <Th>Contact</Th>
+                  <Th>Phone Number</Th>
                   <Th>Email</Th>
                   <Th>Payment Terms</Th>
                   <Th>Due Date</Th>
@@ -287,12 +288,11 @@ const Vendors = () => {
                         <Badge colorScheme="purple">{vendor.category}</Badge>
                       </Td>
                       <Td>
-                        <HStack spacing={1}>
-                          <FiPhone size={14} />
-                          <Text fontSize="sm">{vendor.phone}</Text>
-                        </HStack>
+                        <Text fontSize="sm">{vendor.phone}</Text>
                       </Td>
-                      <Td fontSize="sm">{vendor.email}</Td>
+                      <Td>
+                        <Text fontSize="sm">{vendor.email}</Text>
+                      </Td>
                       <Td>
                         <HStack>
                           <FiClock size={14} />
@@ -335,19 +335,36 @@ const Vendors = () => {
                         </Badge>
                       </Td>
                       <Td>
-                        <HStack spacing={2}>
+                        <HStack spacing={1}>
                           <IconButton
                             icon={<FiEye />}
                             size="sm"
                             variant="ghost"
-                            colorScheme="blue"
                             onClick={() => handleView(vendor)}
+                            aria-label="View"
+                          />
+                          <IconButton
+                            icon={<FaWhatsapp />}
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="green"
+                            onClick={() => window.open(`https://wa.me/${vendor.phone.replace(/\s/g, '')}`, '_blank')}
+                            aria-label="WhatsApp"
+                          />
+                          <IconButton
+                            icon={<FiMail />}
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="blue"
+                            onClick={() => window.open(`mailto:${vendor.email}`, '_blank')}
+                            aria-label="Email"
                           />
                           <IconButton
                             icon={<FiEdit />}
                             size="sm"
                             variant="ghost"
-                            colorScheme="green"
+                            colorScheme="orange"
+                            aria-label="Edit"
                           />
                         </HStack>
                       </Td>
@@ -392,22 +409,36 @@ const Vendors = () => {
 
                 <SimpleGrid columns={2} spacing={4}>
                   <Box>
-                    <HStack mb={1}>
-                      <FiPhone />
-                      <Text fontSize="sm" color="gray.600">
-                        Phone
-                      </Text>
+                    <Text fontSize="sm" color="gray.600" mb={1}>
+                      Phone Number
+                    </Text>
+                    <HStack spacing={2}>
+                      <Text fontWeight="bold">{selectedVendor.phone}</Text>
+                      <IconButton
+                        icon={<FaWhatsapp />}
+                        size="xs"
+                        colorScheme="green"
+                        variant="ghost"
+                        aria-label="WhatsApp"
+                        onClick={() => window.open(`https://wa.me/${selectedVendor.phone.replace(/\s/g, '')}`, '_blank')}
+                      />
                     </HStack>
-                    <Text fontWeight="bold">{selectedVendor.phone}</Text>
                   </Box>
                   <Box>
-                    <HStack mb={1}>
-                      <FiMail />
-                      <Text fontSize="sm" color="gray.600">
-                        Email
-                      </Text>
+                    <Text fontSize="sm" color="gray.600" mb={1}>
+                      Email
+                    </Text>
+                    <HStack spacing={2}>
+                      <Text fontWeight="bold">{selectedVendor.email}</Text>
+                      <IconButton
+                        icon={<FiMail />}
+                        size="xs"
+                        colorScheme="blue"
+                        variant="ghost"
+                        aria-label="Send Email"
+                        onClick={() => window.open(`mailto:${selectedVendor.email}`, '_blank')}
+                      />
                     </HStack>
-                    <Text fontWeight="bold">{selectedVendor.email}</Text>
                   </Box>
                 </SimpleGrid>
 
@@ -534,7 +565,7 @@ const Vendors = () => {
 
               <SimpleGrid columns={2} spacing={4} w="full">
                 <FormControl isRequired>
-                  <FormLabel>Phone</FormLabel>
+                  <FormLabel>Phone Number</FormLabel>
                   <Input placeholder="+91 XXXXX XXXXX" />
                 </FormControl>
                 <FormControl isRequired>
