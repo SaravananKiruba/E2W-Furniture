@@ -45,7 +45,7 @@ const Header = ({ onToggle }) => {
           display={{ base: 'none', sm: 'block' }}
           letterSpacing="tight"
         >
-          Saakaar Furniture
+          E2W Furniture
         </Text>
         <Text 
           fontSize="sm" 
@@ -54,7 +54,7 @@ const Header = ({ onToggle }) => {
           display={{ base: 'block', sm: 'none' }}
           letterSpacing="tight"
         >
-          Saakaar
+          E2W
         </Text>
       </HStack>
 

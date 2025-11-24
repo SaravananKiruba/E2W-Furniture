@@ -122,7 +122,7 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
         boxShadow="md"
       >
         <Text fontSize="xl" fontWeight="bold" letterSpacing="tight">
-          Saakaar Furniture
+          E2W Furniture
         </Text>
       </Flex>
 

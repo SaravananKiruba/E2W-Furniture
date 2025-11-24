@@ -82,7 +82,7 @@ const CustomerLedger = () => {
       return;
     }
 
-    const message = `Dear ${entry.customerName},\n\nThis is a payment reminder from Saakaar Furniture.\n\nOutstanding Amount: ${formatCurrency(entry.balance)}\nTotal Orders: ${formatCurrency(entry.totalOrders)}\nAmount Paid: ${formatCurrency(entry.totalPaid)}\n\nKindly make the payment at your earliest convenience.\n\nThank you!\nSaakaar Furniture Team`;
+    const message = `Dear ${entry.customerName},\n\nThis is a payment reminder from E2W Furniture.\n\nOutstanding Amount: ${formatCurrency(entry.balance)}\nTotal Orders: ${formatCurrency(entry.totalOrders)}\nAmount Paid: ${formatCurrency(entry.totalPaid)}\n\nKindly make the payment at your earliest convenience.\n\nThank you!\nE2W Furniture Team`;
     
     const whatsappUrl = `https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');

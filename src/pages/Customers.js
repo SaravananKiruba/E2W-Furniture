@@ -131,7 +131,7 @@ const Customers = () => {
 
     // Simulate WhatsApp message sending
     selectedCustomersList.forEach((customer) => {
-      const message = `Dear ${customer.name}, Wishing you a very Happy Birthday! 🎉 May this special day bring you joy and happiness. - Saakaar Furniture Team`;
+      const message = `Dear ${customer.name}, Wishing you a very Happy Birthday! 🎉 May this special day bring you joy and happiness. - E2W Furniture Team`;
       const whatsappUrl = `https://wa.me/${customer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
     });
@@ -475,7 +475,7 @@ const Customers = () => {
               colorScheme="green" 
               mr={3}
               onClick={() => {
-                const message = `Dear ${selectedCustomer.name}, Wishing you a very Happy Birthday! 🎉 - Saakaar Furniture Team`;
+                const message = `Dear ${selectedCustomer.name}, Wishing you a very Happy Birthday! 🎉 - E2W Furniture Team`;
                 const whatsappUrl = `https://wa.me/${selectedCustomer.phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank');
               }}
