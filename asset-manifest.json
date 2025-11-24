@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/E2W-Furniture/static/css/main.2dea3d85.css",
-    "main.js": "/E2W-Furniture/static/js/main.f9ee67f5.js",
+    "main.js": "/E2W-Furniture/static/js/main.abccbe87.js",
     "static/js/206.000f796a.chunk.js": "/E2W-Furniture/static/js/206.000f796a.chunk.js",
     "index.html": "/E2W-Furniture/index.html"
   },
   "entrypoints": [
     "static/css/main.2dea3d85.css",
-    "static/js/main.f9ee67f5.js"
+    "static/js/main.abccbe87.js"
   ]
 }
